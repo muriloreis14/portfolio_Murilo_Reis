@@ -1,0 +1,37 @@
+name: Atualiza Dados Economicos
+
+# Configura o robô para rodar de hora em hora E também manualmente
+on:
+  schedule:
+    - cron: '0 * * * *' 
+  workflow_dispatch: 
+
+# Dá permissão para o robô salvar o arquivo no seu repositório
+permissions:
+  contents: write
+
+jobs:
+  atualiza:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Acessa os arquivos do site
+        uses: actions/checkout@v3
+
+      - name: Prepara o Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instala as bibliotecas
+        run: pip install -r requirements.txt
+
+      - name: Executa o seu script Python
+        run: python atualiza.py
+
+      - name: Salva o novo dados.json no GitHub
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add dados.json
+          git commit -m "Robô atualizou o IBOVESPA" || exit 0
+          git push
