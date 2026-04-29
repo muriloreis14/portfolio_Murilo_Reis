@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const elementoSelic = document.getElementById("valor-selic");
 
     // 1. DADOS AUTOMÁTICOS: Lendo do SEU próprio arquivo dados.json com o "quebrador de cache"
-    fetch('dados.json?v=' + new Date().getTime())
+    fetch('dadosibovespa.json?v=' + new Date().getTime())
         .then(resposta => resposta.json())
         .then(dados => {
             // Substitui os valores na tela pelos dados do seu arquivo
