@@ -19,13 +19,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #00ff88; /* Destaque verde neon */
+    border-bottom: 2px solid #d3d3d3; /* Linha cinza claro */
 }
 
 .logo {
     font-size: 24px;
     font-weight: bold;
-    color: #00ff88;
+    color: #d3d3d3; /* Nome em cinza claro */
 }
 
 .abas {
@@ -44,8 +44,8 @@ body {
 }
 
 .abas li a:hover, .abas li a.ativo {
-    background-color: #00ff88;
-    color: #121212;
+    background-color: #d3d3d3; /* Fundo cinza claro ao passar o mouse */
+    color: #121212; /* Texto escuro para dar contraste */
     font-weight: bold;
 }
 
@@ -66,7 +66,7 @@ header p {
     margin-bottom: 40px;
 }
 
-/* Cards numéricos (onde entrarão Selic, IBOV, etc.) */
+/* Cards numéricos */
 .cards-resumo {
     display: flex;
     gap: 20px;
@@ -92,5 +92,5 @@ header p {
 .valor {
     font-size: 28px;
     font-weight: bold;
-    color: #00ff88;
+    color: #d3d3d3; /* Números em cinza claro */
 }
