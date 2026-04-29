@@ -17,7 +17,7 @@ try:
     }
 
     # Salva reescrevendo o seu arquivo dados.json
-    with open("dados.json", "w") as f:
+    with open("dadosibovespa.json", "w") as f:
         json.dump(dados, f)
         
     print("Dados atualizados com sucesso!")
