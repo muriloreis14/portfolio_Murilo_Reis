@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Econômico | Visão Geral</title>
+    <!-- O link abaixo conectará o HTML ao visual (Dark Mode) que faremos depois -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Menu de Navegação -->
+    <nav class="menu-superior">
+        <div class="logo">EcoDash</div>
+        <ul class="abas">
+            <li><a href="index.html" class="ativo">Home</a></li>
+            <li><a href="ativos.html">Análise de Ativos</a></li>
+            <li><a href="preditivos.html">Modelos Preditivos</a></li>
+            <li><a href="metodologia.html">Metodologia</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo Principal da Home -->
+    <main class="conteudo">
+        <header>
+            <h1>Visão Geral do Mercado</h1>
+            <p>Acompanhamento de indicadores econômicos e bolsa de valores atualizados de hora em hora.</p>
+        </header>
+
+        <!-- Espaço onde colocaremos os primeiros resumos/cards numéricos -->
+        <section class="cards-resumo">
+            <div class="card">
+                <h3>IBOVESPA</h3>
+                <p class="valor" id="valor-ibov">Carregando...</p>
+            </div>
+            <div class="card">
+                <h3>Taxa Selic</h3>
+                <p class="valor" id="valor-selic">Carregando...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- O link abaixo conectará a inteligência dos gráficos depois -->
+    <script src="js/script.js"></script>
+</body>
+</html>

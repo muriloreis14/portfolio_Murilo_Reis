@@ -1,0 +1,96 @@
+/* Reset básico para manter o padrão em todos os navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fundo escuro estilo terminal financeiro */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Estilo da barra de navegação superior */
+.menu-superior {
+    background-color: #1e1e1e;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #00ff88; /* Destaque verde neon */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00ff88;
+}
+
+.abas {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.abas li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.abas li a:hover, .abas li a.ativo {
+    background-color: #00ff88;
+    color: #121212;
+    font-weight: bold;
+}
+
+/* Área central de conteúdo */
+.conteudo {
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header h1 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #a0a0a0;
+    margin-bottom: 40px;
+}
+
+/* Cards numéricos (onde entrarão Selic, IBOV, etc.) */
+.cards-resumo {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    width: 250px;
+    border: 1px solid #333;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.card h3 {
+    font-size: 14px;
+    color: #a0a0a0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.valor {
+    font-size: 28px;
+    font-weight: bold;
+    color: #00ff88;
+}
