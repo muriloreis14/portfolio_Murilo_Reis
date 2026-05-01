@@ -43,7 +43,7 @@ def atualizar_dados():
             print(f"Erro no Yahoo ({nome}): {e}")
 
     # --- 2. BANCO CENTRAL (Selic, IPCA, PIB) ---
-    series_bcb = {"1178": "selic", "433": "ipca", "22009": "pib"}
+    series_bcb = {"1178": "selic", "433": "ipca", "4380": "pib"}
     for codigo, nome in series_bcb.items():
         try:
             url = f'https://api.bcb.gov.br/dados/serie/bcdata.sgs.{codigo}/dados?formato=json&dataInicial={data_ini}&dataFinal={data_fim}'
