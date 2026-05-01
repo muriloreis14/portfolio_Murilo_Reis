@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 def atualizar_dados():
     # Criar as pastas se elas não existirem
-    os.makedirs('Base de Dados', exist_ok=True)
+    os.makedirs('Base_de_Dados', exist_ok=True)
     os.makedirs('arquivos download', exist_ok=True)
 
     simbolo = "^BVSP"
@@ -24,13 +24,13 @@ def atualizar_dados():
     df.columns = ['mes', 'fechamento']
 
     # 3. Gerar o arquivo JSON na pasta "Base de Dados"
-    path_json = os.path.join('Base de Dados', 'series_ibovespa.json')
+    path_json = os.path.join('Base_de_Dados', 'series_ibovespa.json')
     dados_json = df.to_dict(orient='records')
     with open(path_json, 'w', encoding='utf-8') as f:
         json.dump(dados_json, f, ensure_ascii=False, indent=4)
 
     # 4. Gerar o arquivo CSV na pasta "arquivos download"
-    path_csv = os.path.join('arquivos download', 'series_ibovespa.csv')
+    path_csv = os.path.join('arquivos_download', 'series_ibovespa.csv')
     df.to_csv(path_csv, index=False, sep=';', encoding='utf-8-sig')
 
     print("Pastas e arquivos atualizados com sucesso!")
