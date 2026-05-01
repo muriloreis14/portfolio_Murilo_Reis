@@ -23,10 +23,10 @@ jobs:
       - name: Executar script de atualização
         run: python update_ibov.py
 
-      - name: Salvar alterações no repositório
+     - name: Salvar alterações no repositório
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git add series_ibovespa.json series_ibovespa.csv
-          git commit -m "Dados atualizados: $(date +'%Y-%m-%d')" || exit 0
+          git add "Base de Dados/*" "arquivos download/*"
+          git commit -m "Dados organizados em pastas: $(date +'%Y-%m-%d')" || exit 0
           git push
