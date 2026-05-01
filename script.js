@@ -5,22 +5,33 @@ document.addEventListener("DOMContentLoaded", function() {
     const elementoIbov = document.getElementById("valor-ibov");
     const elementoSelic = document.getElementById("valor-selic");
 
-    // 1. DADOS AUTOMÁTICOS: IBOVESPA NOS CARDS
-    fetch('base_de_dados/series_ibovespa.json?v=' + new Date().getTime())
+    // 1. DADOS AUTOMÁTICOS: Card do IBOVESPA
+    fetch('base_de_dados/series_ibov.json?v=' + new Date().getTime())
         .then(resposta => resposta.json())
         .then(dados => {
-            // Se o arquivo tiver a mesma estrutura do gráfico, pegamos o último valor
+            // Pega o último item da lista de valores
             let ultimoValor = dados.valores[dados.valores.length - 1];
             elementoIbov.innerText = ultimoValor.toLocaleString('pt-BR') + " pts";
             elementoIbov.style.color = "#d3d3d3";
+        })
+        .catch(erro => {
+            console.log("Erro ao buscar dados do IBOVESPA para o card:", erro);
+            elementoIbov.innerText = "Erro";
+        });
 
-            // Card da Selic fixo (ou pode conectar com o arquivo da Selic depois)
-            elementoSelic.innerText = "10,75%";
+    // 2. DADOS AUTOMÁTICOS: Card da SELIC
+    fetch('base_de_dados/series_selic.json?v=' + new Date().getTime())
+        .then(resposta => resposta.json())
+        .then(dados => {
+            // Pega o último item da lista de valores
+            let ultimoValor = dados.valores[dados.valores.length - 1];
+            // Formata adicionando o símbolo de porcentagem
+            elementoSelic.innerText = ultimoValor + "%";
             elementoSelic.style.color = "#d3d3d3";
         })
         .catch(erro => {
-            console.log("Erro ao buscar dados dos cards:", erro);
-            elementoIbov.innerText = "Erro ao carregar";
+            console.log("Erro ao buscar dados da Selic para o card:", erro);
+            elementoSelic.innerText = "Erro";
         });
 
     // --- MOTOR INTELIGENTE DO GRÁFICO ---
@@ -43,7 +54,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     data: {
                         labels: dados.periodos,
                         datasets: [{
-                            // A linha abaixo agora é inteligente: aceita "nome_indicador" ou apenas "nome"
                             label: dados.nome_indicador || dados.nome || "Indicador", 
                             data: dados.valores,
                             borderColor: '#d3d3d3',
