@@ -44,11 +44,12 @@
             <div class="cabecalho-grafico">
                 <h2>Análise Histórica</h2>
                 <select id="seletor-indicador" class="caixa-selecao">
-                    <!-- O valor (value) aponta para a pasta onde o Python salva o JSON -->
-                    <option value="base_de_dados/historico_ibov.json">IBOVESPA</option>
-                    <option value="historico_selic.json">Taxa Selic</option>
-                    <option value="historico_pib.json">PIB Trimestral</option>
-                    <option value="historico_inflacao.json">Inflação (IPCA)</option>
+                    <!-- O valor (value) aponta exatamente para os arquivos que o seu robô criou -->
+                    <option value="base_de_dados/series_ibov.json">IBOVESPA</option>
+                    <option value="base_de_dados/series_selic.json">Taxa Selic</option>
+                    <option value="base_de_dados/series_pib.json">PIB Trimestral</option>
+                    <option value="base_de_dados/series_ipca.json">Inflação (IPCA)</option>
+                    <option value="base_de_dados/series_cambio.json">Taxa de Câmbio</option>
                 </select>
             </div>
             <canvas id="graficoPib"></canvas>
