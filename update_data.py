@@ -5,68 +5,80 @@ import os
 from datetime import datetime, timedelta
 
 def get_sgs_data(codigo, inicio, fim):
+    # Mudamos para uma abordagem de leitura mais segura
     url = f'https://api.bcb.gov.br/dados/serie/bcdata.sgs.{codigo}/dados?formato=json&dataInicial={inicio}&dataFinal={fim}'
-    df = pd.read_json(url)
-    df['data'] = pd.to_datetime(df['data'], dayfirst=True)
-    return df
+    try:
+        df = pd.read_json(url)
+        if df.empty:
+            return pd.DataFrame()
+        df['data'] = pd.to_datetime(df['data'], dayfirst=True)
+        # Garantir que o valor seja numérico
+        df['valor'] = pd.to_numeric(df['valor'], errors='coerce')
+        return df
+    except Exception as e:
+        print(f"Erro ao acessar série {codigo}: {e}")
+        return pd.DataFrame()
 
 def atualizar_dados():
     os.makedirs('base_de_dados', exist_ok=True)
     os.makedirs('arquivos_download', exist_ok=True)
     
     fim_dt = datetime.now()
-    ini_dt = fim_dt - timedelta(days=400)
+    ini_dt = fim_dt - timedelta(days=450) # Aumentamos a margem para o PIB trimestral
     data_fim = fim_dt.strftime('%d/%m/%Y')
     data_ini = ini_dt.strftime('%d/%m/%Y')
 
     # --- 1. IBOVESPA & CÂMBIO (Yahoo Finance) ---
     tickers = {"^BVSP": "ibov", "USDBRL=X": "cambio"}
     for ticker, nome in tickers.items():
-        data = yf.download(ticker, start=ini_dt, end=fim_dt, interval='1mo')
-        df_temp = data[['Close']].reset_index()
-        df_temp['Date'] = df_temp['Date'].dt.strftime('%Y-%m')
-        
-        # JSON para o site
-        json_data = {
-            "nome": f"Evolução {nome.upper()}",
-            "periodos": df_temp['Date'].tolist(),
-            "valores": df_temp['Close'].round(2).tolist()
-        }
-        with open(f'base_de_dados/series_{nome}.json', 'w') as f:
-            json.dump(json_data, f, indent=4)
-        
-        # CSV para download
-        df_temp.to_csv(f'arquivos_download/series_{nome}.csv', index=False, sep=';')
+        try:
+            # Usando auto_adjust para evitar problemas com colunas extras
+            data = yf.download(ticker, start=ini_dt, end=fim_dt, interval='1mo', auto_adjust=True)
+            if not data.empty:
+                df_temp = data[['Close']].reset_index()
+                df_temp.columns = ['Date', 'Close'] # Padroniza nomes
+                df_temp['Date'] = df_temp['Date'].dt.strftime('%Y-%m')
+                
+                json_data = {
+                    "nome": f"Evolução {nome.upper()}",
+                    "periodos": df_temp['Date'].tolist(),
+                    "valores": df_temp['Close'].round(2).tolist()
+                }
+                with open(f'base_de_dados/series_{nome}.json', 'w', encoding='utf-8') as f:
+                    json.dump(json_data, f, indent=4, ensure_ascii=False)
+                
+                df_temp.to_csv(f'arquivos_download/series_{nome}.csv', index=False, sep=';', encoding='utf-8-sig')
+        except Exception as e:
+            print(f"Erro no Yahoo Finance ({nome}): {e}")
 
     # --- 2. SELIC, IPCA & PIB (Banco Central) ---
     series_bcb = {
-        "1178": "selic",  # Selic Meta anualizada
-        "433": "ipca",    # IPCA variação mensal %
-        "22109": "pib"    # PIB trimestral valores correntes
+        "1178": "selic",  
+        "433": "ipca",    
+        "22109": "pib"    
     }
 
     for codigo, nome in series_bcb.items():
-        try:
-            df_bcb = get_sgs_data(codigo, data_ini, data_fim)
-            
-            # Ajuste de data para o formato do site
+        df_bcb = get_sgs_data(codigo, data_ini, data_fim)
+        
+        if not df_bcb.empty:
             df_bcb['mes'] = df_bcb['data'].dt.strftime('%Y-%m')
             
-            # No caso do PIB trimestral, ele virá apenas nos meses de fechamento do trimestre
+            # Filtramos para pegar os últimos 12 registros válidos
+            df_final = df_bcb.dropna(subset=['valor']).tail(12)
+            
             json_bcb = {
                 "nome": f"Indicador {nome.upper()}",
-                "periodos": df_bcb['mes'].tolist()[-12:], # Pega os últimos 12 registros
-                "valores": df_bcb['valor'].tolist()[-12:]
+                "periodos": df_final['mes'].tolist(),
+                "valores": df_final['valor'].tolist()
             }
             
-            with open(f'base_de_dados/series_{nome}.json', 'w') as f:
-                json.dump(json_bcb, f, indent=4)
+            with open(f'base_de_dados/series_{nome}.json', 'w', encoding='utf-8') as f:
+                json.dump(json_bcb, f, indent=4, ensure_ascii=False)
                 
-            df_bcb[['mes', 'valor']].tail(12).to_csv(f'arquivos_download/series_{nome}.csv', index=False, sep=';')
-        except Exception as e:
-            print(f"Erro ao buscar {nome}: {e}")
+            df_final[['mes', 'valor']].to_csv(f'arquivos_download/series_{nome}.csv', index=False, sep=';', encoding='utf-8-sig')
 
-    print(f"Sucesso! Todos os indicadores atualizados em {datetime.now()}")
+    print(f"Processo finalizado em {datetime.now()}")
 
 if __name__ == "__main__":
     atualizar_dados()
