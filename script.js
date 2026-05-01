@@ -5,56 +5,74 @@ document.addEventListener("DOMContentLoaded", function() {
     const elementoIbov = document.getElementById("valor-ibov");
     const elementoSelic = document.getElementById("valor-selic");
 
-    // 1. DADOS AUTOMÁTICOS: Lendo do SEU próprio arquivo dados.json com o "quebrador de cache"
-    fetch('dadosibovespa.json?v=' + new Date().getTime())
+    // 1. DADOS AUTOMÁTICOS: IBOVESPA NOS CARDS
+    fetch('base_de_dados/series_ibovespa.json?v=' + new Date().getTime())
         .then(resposta => resposta.json())
         .then(dados => {
-            // Substitui os valores na tela pelos dados do seu arquivo
-            elementoIbov.innerText = dados.ibovespa + " pts";
+            // Se o arquivo tiver a mesma estrutura do gráfico, pegamos o último valor
+            let ultimoValor = dados.valores[dados.valores.length - 1];
+            elementoIbov.innerText = ultimoValor.toLocaleString('pt-BR') + " pts";
             elementoIbov.style.color = "#d3d3d3";
 
-            elementoSelic.innerText = dados.selic;
+            // Card da Selic fixo (ou pode conectar com o arquivo da Selic depois)
+            elementoSelic.innerText = "10,75%";
             elementoSelic.style.color = "#d3d3d3";
         })
         .catch(erro => {
-            console.log("Erro ao buscar dados:", erro);
+            console.log("Erro ao buscar dados dos cards:", erro);
             elementoIbov.innerText = "Erro ao carregar";
         });
 
-    // --- LÓGICA DO GRÁFICO CHART.JS ---
-    const ctx = document.getElementById('graficoPib').getContext('2d');
+    // --- MOTOR INTELIGENTE DO GRÁFICO ---
+    
+    const seletor = document.getElementById("seletor-indicador");
+    let graficoAtual = null;
 
-    const graficoPib = new Chart(ctx, {
-        type: 'line', 
-        data: {
-            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-            datasets: [{
-                label: 'Índice IBC-Br (Pontos)',
-                data: [144.5, 145.2, 146.1, 145.8, 147.0, 147.5, 148.2, 149.0, 148.5, 150.1, 151.0, 152.3],
-                borderColor: '#d3d3d3',
-                backgroundColor: 'rgba(211, 211, 211, 0.1)',
-                borderWidth: 2,
-                tension: 0.3,
-                fill: true 
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    labels: { color: '#d3d3d3' } 
+    function desenharGrafico(nomeDoArquivo) {
+        fetch(nomeDoArquivo + '?v=' + new Date().getTime())
+            .then(resposta => resposta.json())
+            .then(dados => {
+                const ctx = document.getElementById('graficoPib').getContext('2d');
+
+                if (graficoAtual !== null) {
+                    graficoAtual.destroy();
                 }
-            },
-            scales: {
-                x: { 
-                    ticks: { color: '#a0a0a0' }, 
-                    grid: { color: '#333' } 
-                },
-                y: { 
-                    ticks: { color: '#a0a0a0' }, 
-                    grid: { color: '#333' } 
-                }
-            }
-        }
-    });
+
+                graficoAtual = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dados.periodos,
+                        datasets: [{
+                            // A linha abaixo agora é inteligente: aceita "nome_indicador" ou apenas "nome"
+                            label: dados.nome_indicador || dados.nome || "Indicador", 
+                            data: dados.valores,
+                            borderColor: '#d3d3d3',
+                            backgroundColor: 'rgba(211, 211, 211, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { labels: { color: '#d3d3d3' } } },
+                        scales: {
+                            x: { ticks: { color: '#a0a0a0' }, grid: { color: '#333' } },
+                            y: { ticks: { color: '#a0a0a0' }, grid: { color: '#333' } }
+                        }
+                    }
+                });
+            })
+            .catch(erro => console.log("Erro ao desenhar o gráfico:", erro));
+    }
+
+    // Escuta o clique na caixa de seleção e desenha o gráfico novo
+    if (seletor) {
+        seletor.addEventListener("change", function() {
+            desenharGrafico(seletor.value); 
+        });
+        
+        // Desenha o primeiro gráfico assim que a página carrega
+        desenharGrafico(seletor.value);
+    }
 });
