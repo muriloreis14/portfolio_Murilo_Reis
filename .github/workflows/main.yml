@@ -27,6 +27,6 @@ jobs:
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git add "Base de Dados/*" "arquivos download/*"
+          git add "Base_de_Dados/*" "arquivos_download/*"
           git commit -m "Dados organizados em pastas: $(date +'%Y-%m-%d')" || exit 0
           git push
