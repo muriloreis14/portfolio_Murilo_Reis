@@ -30,7 +30,7 @@ jobs:
           mkdir -p arquivos_download
 
       - name: Executar script de atualização
-        run: python update_ibov.py
+        run: python update_data.py
 
       - name: Salvar alterações no repositório
         run: |
