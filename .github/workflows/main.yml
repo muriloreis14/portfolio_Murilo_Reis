@@ -2,8 +2,8 @@ name: Atualizar Dados Ibovespa
 
 on:
   schedule:
-    - cron: '0 0 1 * *' # Roda automaticamente no dia 1 de cada mês
-  workflow_dispatch: # Permite que você rode manualmente se quiser testar agora
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -23,10 +23,10 @@ jobs:
       - name: Executar script de atualização
         run: python update_ibov.py
 
-     - name: Salvar alterações no repositório
+      - name: Salvar alterações no repositório
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git add "Base_de_Dados/*" "arquivos_download/*"
-          git commit -m "Dados organizados em pastas: $(date +'%Y-%m-%d')" || exit 0
+          git add base_de_dados/* arquivos_download/*
+          git commit -m "Dados atualizados: $(date +'%Y-%m-%d')" || exit 0
           git push
