@@ -36,7 +36,9 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add base_de_dados/series_ibovespa.json
-          git add arquivos_download/series_ibovespa.csv
-          git commit -m "Dados atualizados: $(date +'%Y-%m-%d')" || echo "Sem alterações para salvar"
+          # O comando abaixo força o Git a reconhecer todas as pastas criadas
+          git add base_de_dados/*.json
+          git add arquivos_download/*.csv
+          # O "|| exit 0" evita que o erro pare o processo se não houver mudanças
+          git commit -m "Atualização multi-indicadores: $(date +'%Y-%m-%d')" || exit 0
           git push origin HEAD:main
