@@ -1,0 +1,32 @@
+name: Atualizar Dados Ibovespa
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # Roda automaticamente no dia 1 de cada mês
+  workflow_dispatch: # Permite que você rode manualmente se quiser testar agora
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Instalar bibliotecas
+        run: pip install yfinance pandas
+
+      - name: Executar script de atualização
+        run: python update_ibov.py
+
+      - name: Salvar alterações no repositório
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add series_ibovespa.json series_ibovespa.csv
+          git commit -m "Dados atualizados: $(date +'%Y-%m-%d')" || exit 0
+          git push
