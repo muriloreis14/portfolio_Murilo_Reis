@@ -10,7 +10,8 @@ def atualizar_dados():
     os.makedirs('arquivos_download', exist_ok=True)
     
     fim_dt = datetime.now()
-    ini_dt = fim_dt - timedelta(days=450)
+    # Aumentamos a janela inicial para pouco mais de 4 anos (1550 dias) para cobrir o PIB
+    ini_dt = fim_dt - timedelta(days=1550)
     data_fim = fim_dt.strftime('%d/%m/%Y')
     data_ini = ini_dt.strftime('%d/%m/%Y')
 
@@ -23,6 +24,9 @@ def atualizar_dados():
                 df = df[['Close']].reset_index()
                 df.columns = ['data', 'valor']
                 df['data'] = df['data'].dt.strftime('%Y-%m')
+                
+                # Filtra exatamente os últimos 24 meses
+                df = df.tail(24)
                 
                 # Salva JSON
                 output_json = {
@@ -47,7 +51,14 @@ def atualizar_dados():
             if not df_bcb.empty:
                 df_bcb['data'] = pd.to_datetime(df_bcb['data'], dayfirst=True)
                 df_bcb['mes'] = df_bcb['data'].dt.strftime('%Y-%m')
-                df_final = df_bcb.tail(12) # Garante os últimos 12 meses
+                
+                # Lógica para separar os prazos
+                if nome == "pib":
+                    # PIB é trimestral: 4 anos = últimos 16 registros
+                    df_final = df_bcb.tail(16)
+                else:
+                    # Selic e IPCA são mensais: últimos 24 registros
+                    df_final = df_bcb.tail(24)
                 
                 output_json = {
                     "nome": f"Indicador {nome.upper()}",
