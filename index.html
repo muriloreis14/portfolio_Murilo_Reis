@@ -38,13 +38,24 @@
                 <p class="valor" id="valor-selic">Carregando...</p>
             </div>
         </section>
+
+        <!-- Seção do Gráfico com a Caixa de Seleção -->
         <section class="grafico-container">
-            <h2>Evolução Mensal - IBC-Br (Prévia do PIB)</h2>
+            <div class="cabecalho-grafico">
+                <h2>Análise Histórica</h2>
+                <select id="seletor-indicador" class="caixa-selecao">
+                    <!-- O valor (value) aponta para a pasta onde o Python salva o JSON -->
+                    <option value="base_de_dados/historico_ibov.json">IBOVESPA</option>
+                    <option value="historico_selic.json">Taxa Selic</option>
+                    <option value="historico_pib.json">PIB Trimestral</option>
+                    <option value="historico_inflacao.json">Inflação (IPCA)</option>
+                </select>
+            </div>
             <canvas id="graficoPib"></canvas>
         </section>
     </main>
 
-    <!-- O link abaixo conectará a inteligência dos gráficos depois -->
+    <!-- Importando o Chart.js e conectando o nosso script -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
