@@ -4,51 +4,69 @@ import json
 import os
 from datetime import datetime, timedelta
 
+def get_sgs_data(codigo, inicio, fim):
+    url = f'https://api.bcb.gov.br/dados/serie/bcdata.sgs.{codigo}/dados?formato=json&dataInicial={inicio}&dataFinal={fim}'
+    df = pd.read_json(url)
+    df['data'] = pd.to_datetime(df['data'], dayfirst=True)
+    return df
+
 def atualizar_dados():
-    # Cria as pastas caso não existam
     os.makedirs('base_de_dados', exist_ok=True)
     os.makedirs('arquivos_download', exist_ok=True)
+    
+    fim_dt = datetime.now()
+    ini_dt = fim_dt - timedelta(days=400)
+    data_fim = fim_dt.strftime('%d/%m/%Y')
+    data_ini = ini_dt.strftime('%d/%m/%Y')
 
-    simbolo = "^BVSP"
-    # Aumentamos a margem para garantir que pegamos 12 fechamentos mensais
-    fim = datetime.now()
-    inicio = fim - timedelta(days=400)
+    # --- 1. IBOVESPA & CÂMBIO (Yahoo Finance) ---
+    tickers = {"^BVSP": "ibov", "USDBRL=X": "cambio"}
+    for ticker, nome in tickers.items():
+        data = yf.download(ticker, start=ini_dt, end=fim_dt, interval='1mo')
+        df_temp = data[['Close']].reset_index()
+        df_temp['Date'] = df_temp['Date'].dt.strftime('%Y-%m')
+        
+        # JSON para o site
+        json_data = {
+            "nome": f"Evolução {nome.upper()}",
+            "periodos": df_temp['Date'].tolist(),
+            "valores": df_temp['Close'].round(2).tolist()
+        }
+        with open(f'base_de_dados/series_{nome}.json', 'w') as f:
+            json.dump(json_data, f, indent=4)
+        
+        # CSV para download
+        df_temp.to_csv(f'arquivos_download/series_{nome}.csv', index=False, sep=';')
 
-    # Ticker explícito e download forçado
-    ticker = yf.Ticker(simbolo)
-    ibov = ticker.history(start=inicio, end=fim, interval='1mo')
-
-    if ibov.empty:
-        raise Exception("Erro crítico: O Yahoo Finance não retornou dados para o Ibovespa.")
-
-    df = ibov[['Close']].reset_index()
-    df['Date'] = df['Date'].dt.strftime('%Y-%m')
-    df.columns = ['mes', 'fechamento']
-
-    # Garante que os valores sejam numéricos e limpos
-    df['fechamento'] = df['fechamento'].round(2)
-
-    # ---------------------------------------------------------
-    # NOVO FORMATO DO JSON (Ideal para o Chart.js)
-    # ---------------------------------------------------------
-    dados_grafico = {
-        "nome_indicador": "Evolução do IBOVESPA (Pontos)",
-        "periodos": df['mes'].tolist(),
-        "valores": df['fechamento'].tolist()
+    # --- 2. SELIC, IPCA & PIB (Banco Central) ---
+    series_bcb = {
+        "1178": "selic",  # Selic Meta anualizada
+        "433": "ipca",    # IPCA variação mensal %
+        "22109": "pib"    # PIB trimestral valores correntes
     }
 
-    # Salvando o JSON na pasta base_de_dados
-    path_json = os.path.join('base_de_dados', 'historico_ibov.json')
-    with open(path_json, 'w', encoding='utf-8') as f:
-        json.dump(dados_grafico, f, indent=4, ensure_ascii=False)
+    for codigo, nome in series_bcb.items():
+        try:
+            df_bcb = get_sgs_data(codigo, data_ini, data_fim)
+            
+            # Ajuste de data para o formato do site
+            df_bcb['mes'] = df_bcb['data'].dt.strftime('%Y-%m')
+            
+            # No caso do PIB trimestral, ele virá apenas nos meses de fechamento do trimestre
+            json_bcb = {
+                "nome": f"Indicador {nome.upper()}",
+                "periodos": df_bcb['mes'].tolist()[-12:], # Pega os últimos 12 registros
+                "valores": df_bcb['valor'].tolist()[-12:]
+            }
+            
+            with open(f'base_de_dados/series_{nome}.json', 'w') as f:
+                json.dump(json_bcb, f, indent=4)
+                
+            df_bcb[['mes', 'valor']].tail(12).to_csv(f'arquivos_download/series_{nome}.csv', index=False, sep=';')
+        except Exception as e:
+            print(f"Erro ao buscar {nome}: {e}")
 
-    # ---------------------------------------------------------
-    # MANTENDO O SEU CSV PARA DOWNLOAD INTACTO
-    # ---------------------------------------------------------
-    path_csv = os.path.join('arquivos_download', 'series_ibovespa.csv')
-    df.to_csv(path_csv, index=False, sep=';', encoding='utf-8-sig')
-
-    print(f"Sucesso! Arquivos gerados em {datetime.now()}")
+    print(f"Sucesso! Todos os indicadores atualizados em {datetime.now()}")
 
 if __name__ == "__main__":
     atualizar_dados()
