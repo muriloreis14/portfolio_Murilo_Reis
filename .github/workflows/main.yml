@@ -20,6 +20,11 @@ jobs:
       - name: Instalar bibliotecas
         run: pip install yfinance pandas
 
+      - name: Criar pastas de suporte
+        run: |
+          mkdir -p base_de_dados
+          mkdir -p arquivos_download
+
       - name: Executar script de atualização
         run: python update_ibov.py
 
@@ -27,6 +32,7 @@ jobs:
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git add base_de_dados/* arquivos_download/*
+          git add base_de_dados/series_ibovespa.json
+          git add arquivos_download/series_ibovespa.csv
           git commit -m "Dados atualizados: $(date +'%Y-%m-%d')" || exit 0
           git push
