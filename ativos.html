@@ -36,8 +36,28 @@
             </div>
         </section>
 
-        <!-- Área onde os gráficos e tabelas da empresa vão aparecer depois -->
+        <!-- Área onde os gráficos e tabelas da empresa vão aparecer -->
         <section id="painel-empresa" style="display: none;">
+            <div style="border-bottom: 2px solid #333; margin-bottom: 30px; padding-bottom: 10px;">
+                <h2 id="titulo-empresa" style="color: #ffffff; font-size: 28px;">Ativo Selecionado</h2>
+            </div>
+            
+            <!-- Card de Preço Atual -->
+            <div class="cards-resumo" style="margin-bottom: 30px;">
+                <div class="card" style="width: 300px;">
+                    <h3>Preço de Fechamento (Atual)</h3>
+                    <p class="valor" id="valor-ativo">Carregando...</p>
+                </div>
+            </div>
+
+            <!-- Gráfico Histórico -->
+            <div class="grafico-container">
+                <div class="cabecalho-grafico">
+                    <h2>Histórico de Preços (Desde o IPO)</h2>
+                </div>
+                <canvas id="graficoAtivo"></canvas>
+            </div>
+        </section>
             <h2 id="titulo-empresa">Dados da Empresa</h2>
             <!-- Colocaremos os dados do CAPEX e WACC aqui futuramente -->
         </section>
