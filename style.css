@@ -127,3 +127,69 @@ body {
 .grafico-container h2 {
     color: #d3d3d3;
     margin-bottom: 20px;
+
+/* --- BARRA DE BUSCA DE ATIVOS --- */
+.busca-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.busca-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+}
+
+#input-busca {
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 18px;
+    background-color: #1e1e1e;
+    color: #d3d3d3;
+    border: 2px solid #333;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+#input-busca:focus {
+    border-color: #a0a0a0;
+}
+
+/* A lista flutuante de sugestões */
+#lista-sugestoes {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 0 0 8px 8px;
+    list-style: none;
+    margin-top: 4px;
+    max-height: 250px;
+    overflow-y: auto; /* Cria barra de rolagem se tiver muitos ativos */
+    z-index: 10;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+}
+
+#lista-sugestoes.escondido {
+    display: none;
+}
+
+#lista-sugestoes li {
+    padding: 12px 24px;
+    cursor: pointer;
+    color: #a0a0a0;
+    font-weight: bold;
+    border-bottom: 1px solid #2a2a2a;
+    transition: 0.2s;
+}
+
+#lista-sugestoes li:hover {
+    background-color: #333;
+    color: #ffffff;
+}
