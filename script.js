@@ -12,82 +12,97 @@ document.addEventListener("DOMContentLoaded", function() {
     const elementoIdp = document.getElementById("valor-idp");
 
     // 1. IBOVESPA
-    fetch('base_de_dados/series_ibov.json?v=' + new Date().getTime())
-        .then(res => res.json())
-        .then(dados => {
-            let ultimoValor = dados.valores[dados.valores.length - 1];
-            elementoIbov.innerText = ultimoValor.toLocaleString('pt-BR') + " pts";
-            elementoIbov.style.color = "#d3d3d3";
-        }).catch(() => { if(elementoIbov) elementoIbov.innerText = "Erro"; });
+    if (elementoIbov) {
+        fetch('base_de_dados/series_ibov.json?v=' + new Date().getTime())
+            .then(res => res.json())
+            .then(dados => {
+                let ultimoValor = dados.valores[dados.valores.length - 1];
+                elementoIbov.innerText = ultimoValor.toLocaleString('pt-BR') + " pts";
+                elementoIbov.style.color = "#d3d3d3";
+            }).catch(() => { elementoIbov.innerText = "Erro"; });
+    }
 
     // 2. SELIC
-    fetch('base_de_dados/series_selic.json?v=' + new Date().getTime())
-        .then(res => res.json())
-        .then(dados => {
-            let ultimoValor = dados.valores[dados.valores.length - 1];
-            elementoSelic.innerText = ultimoValor + "%";
-            elementoSelic.style.color = "#d3d3d3";
-        }).catch(() => { if(elementoSelic) elementoSelic.innerText = "Erro"; });
+    if (elementoSelic) {
+        fetch('base_de_dados/series_selic.json?v=' + new Date().getTime())
+            .then(res => res.json())
+            .then(dados => {
+                let ultimoValor = dados.valores[dados.valores.length - 1];
+                elementoSelic.innerText = ultimoValor + "%";
+                elementoSelic.style.color = "#d3d3d3";
+            }).catch(() => { elementoSelic.innerText = "Erro"; });
+    }
 
     // 3. IPCA (Acumulado 12 meses)
-    fetch('base_de_dados/series_ipca.json?v=' + new Date().getTime())
-        .then(res => res.json())
-        .then(dados => {
-            let ultimos12 = dados.valores.slice(-12);
-            let acumulado = 1;
-            for(let i = 0; i < ultimos12.length; i++) {
-                acumulado = acumulado * (1 + (ultimos12[i] / 100));
-            }
-            acumulado = (acumulado - 1) * 100;
-            elementoIpca.innerText = acumulado.toFixed(2).replace('.', ',') + "%";
-            elementoIpca.style.color = "#d3d3d3";
-        }).catch(() => { if(elementoIpca) elementoIpca.innerText = "Erro"; });
+    if (elementoIpca) {
+        fetch('base_de_dados/series_ipca.json?v=' + new Date().getTime())
+            .then(res => res.json())
+            .then(dados => {
+                let ultimos12 = dados.valores.slice(-12);
+                let acumulado = 1;
+                for(let i = 0; i < ultimos12.length; i++) {
+                    acumulado = acumulado * (1 + (ultimos12[i] / 100));
+                }
+                acumulado = (acumulado - 1) * 100;
+                elementoIpca.innerText = acumulado.toFixed(2).replace('.', ',') + "%";
+                elementoIpca.style.color = "#d3d3d3";
+            }).catch(() => { elementoIpca.innerText = "Erro"; });
+    }
 
     // 4. CÂMBIO
-    fetch('base_de_dados/series_cambio.json?v=' + new Date().getTime())
-        .then(res => res.json())
-        .then(dados => {
-            let ultimoValor = dados.valores[dados.valores.length - 1];
-            elementoCambio.innerText = "R$ " + ultimoValor.toFixed(2).replace('.', ',');
-            elementoCambio.style.color = "#d3d3d3";
-        }).catch(() => { if(elementoCambio) elementoCambio.innerText = "Erro"; });
+    if (elementoCambio) {
+        fetch('base_de_dados/series_cambio.json?v=' + new Date().getTime())
+            .then(res => res.json())
+            .then(dados => {
+                let ultimoValor = dados.valores[dados.valores.length - 1];
+                elementoCambio.innerText = "R$ " + ultimoValor.toFixed(2).replace('.', ',');
+                elementoCambio.style.color = "#d3d3d3";
+            }).catch(() => { elementoCambio.innerText = "Erro"; });
+    }
 
     // 5. DESEMPREGO
-    fetch('base_de_dados/series_desemprego.json?v=' + new Date().getTime())
-        .then(res => res.json())
-        .then(dados => {
-            let ultimoValor = dados.valores[dados.valores.length - 1];
-            elementoDesemprego.innerText = ultimoValor + "%";
-            elementoDesemprego.style.color = "#d3d3d3";
-        }).catch(() => { if(elementoDesemprego) elementoDesemprego.innerText = "Erro"; });
+    if (elementoDesemprego) {
+        fetch('base_de_dados/series_desemprego.json?v=' + new Date().getTime())
+            .then(res => res.json())
+            .then(dados => {
+                let ultimoValor = dados.valores[dados.valores.length - 1];
+                elementoDesemprego.innerText = ultimoValor + "%";
+                elementoDesemprego.style.color = "#d3d3d3";
+            }).catch(() => { elementoDesemprego.innerText = "Erro"; });
+    }
 
     // 6. DÍVIDA PÚBLICA
-    fetch('base_de_dados/series_divida_publica.json?v=' + new Date().getTime())
-        .then(res => res.json())
-        .then(dados => {
-            let ultimoValor = dados.valores[dados.valores.length - 1];
-            elementoDivida.innerText = ultimoValor + "%";
-            elementoDivida.style.color = "#d3d3d3";
-        }).catch(() => { if(elementoDivida) elementoDivida.innerText = "Erro"; });
+    if (elementoDivida) {
+        fetch('base_de_dados/series_divida_publica.json?v=' + new Date().getTime())
+            .then(res => res.json())
+            .then(dados => {
+                let ultimoValor = dados.valores[dados.valores.length - 1];
+                elementoDivida.innerText = ultimoValor + "%";
+                elementoDivida.style.color = "#d3d3d3";
+            }).catch(() => { elementoDivida.innerText = "Erro"; });
+    }
 
     // 7. BALANÇA COMERCIAL
-    fetch('base_de_dados/series_balanca_comercial.json?v=' + new Date().getTime())
-        .then(res => res.json())
-        .then(dados => {
-            let ultimoValor = dados.valores[dados.valores.length - 1];
-            // Formatado com ponto nos milhares
-            elementoBalanca.innerText = "US$ " + ultimoValor.toLocaleString('pt-BR');
-            elementoBalanca.style.color = "#d3d3d3";
-        }).catch(() => { if(elementoBalanca) elementoBalanca.innerText = "Erro"; });
+    if (elementoBalanca) {
+        fetch('base_de_dados/series_balanca_comercial.json?v=' + new Date().getTime())
+            .then(res => res.json())
+            .then(dados => {
+                let ultimoValor = dados.valores[dados.valores.length - 1];
+                elementoBalanca.innerText = "US$ " + ultimoValor.toLocaleString('pt-BR');
+                elementoBalanca.style.color = "#d3d3d3";
+            }).catch(() => { elementoBalanca.innerText = "Erro"; });
+    }
 
     // 8. INVESTIMENTO DIRETO
-    fetch('base_de_dados/series_investimento_direto.json?v=' + new Date().getTime())
-        .then(res => res.json())
-        .then(dados => {
-            let ultimoValor = dados.valores[dados.valores.length - 1];
-            elementoIdp.innerText = "US$ " + ultimoValor.toLocaleString('pt-BR');
-            elementoIdp.style.color = "#d3d3d3";
-        }).catch(() => { if(elementoIdp) elementoIdp.innerText = "Erro"; });
+    if (elementoIdp) {
+        fetch('base_de_dados/series_investimento_direto.json?v=' + new Date().getTime())
+            .then(res => res.json())
+            .then(dados => {
+                let ultimoValor = dados.valores[dados.valores.length - 1];
+                elementoIdp.innerText = "US$ " + ultimoValor.toLocaleString('pt-BR');
+                elementoIdp.style.color = "#d3d3d3";
+            }).catch(() => { elementoIdp.innerText = "Erro"; });
+    }
 
     // --- MOTOR INTELIGENTE DO GRÁFICO ---
     const seletor = document.getElementById("seletor-indicador");
@@ -136,26 +151,24 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         desenharGrafico(seletor.value);
     }
-// ==============================================================
+
+    // ==============================================================
     // --- LÓGICA DA BARRA DE BUSCA (PÁGINA: ANÁLISE DE ATIVOS) ---
     // ==============================================================
     const inputBusca = document.getElementById("input-busca");
     const listaSugestoes = document.getElementById("lista-sugestoes");
 
-    // Só executa se estivermos na página de ativos (onde a barra existe)
     if (inputBusca && listaSugestoes) {
         
-        let ativosB3 = []; // Começa vazia
+        let ativosB3 = [];
 
-        // Busca a lista completa de ativos no arquivo JSON recém-criado
         fetch('base_de_dados/lista_ativos.json?v=' + new Date().getTime())
             .then(res => res.json())
             .then(dados => {
-                ativosB3 = dados.tickers; // Preenche a lista com os dados do arquivo
+                ativosB3 = dados.tickers;
             })
             .catch(erro => console.log("Erro ao carregar a lista de ativos:", erro));
 
-        // A cada vez que o usuário digita uma letra, essa função roda
         inputBusca.addEventListener("input", function() {
             const textoDigitado = inputBusca.value.toUpperCase(); 
             
@@ -165,7 +178,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
 
-            // Filtra os ativos que começam com as letras digitadas
             const resultados = ativosB3.filter(ativo => ativo.startsWith(textoDigitado));
 
             listaSugestoes.innerHTML = "";
@@ -179,7 +191,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         inputBusca.value = ativo; 
                         listaSugestoes.innerHTML = ""; 
                         listaSugestoes.classList.add("escondido");
-                        
                         console.log("O usuário escolheu a empresa: " + ativo);
                     });
                     
@@ -197,3 +208,5 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+
+}); // <--- ESTA É A LINHA QUE FALTAVA! ELA FECHA O CÓDIGO INTEIRO.
