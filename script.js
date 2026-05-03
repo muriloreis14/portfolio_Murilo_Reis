@@ -191,8 +191,67 @@ document.addEventListener("DOMContentLoaded", function() {
                         inputBusca.value = ativo; 
                         listaSugestoes.innerHTML = ""; 
                         listaSugestoes.classList.add("escondido");
-                        console.log("O usuário escolheu a empresa: " + ativo);
+                        
+                        // CHAMA A FUNÇÃO PARA DESENHAR TUDO
+                        carregarDadosAtivo(ativo);
                     });
+                    let graficoAtivoAtual = null;
+
+        function carregarDadosAtivo(ticker) {
+            const painel = document.getElementById("painel-empresa");
+            const tituloAtivo = document.getElementById("titulo-empresa");
+            const cardValor = document.getElementById("valor-ativo");
+            
+            // Revela a seção que estava escondida
+            painel.style.display = "block"; 
+            tituloAtivo.innerText = ticker;
+            cardValor.innerText = "Carregando...";
+
+            // Vai buscar exatamente o arquivo gerado pelo robô
+            fetch(`base_de_dados/ativos/${ticker}.json?v=` + new Date().getTime())
+                .then(res => res.json())
+                .then(dados => {
+                    // Atualiza o Card com o último preço
+                    let ultimoPreco = dados.valores[dados.valores.length - 1];
+                    cardValor.innerText = "R$ " + ultimoPreco.toFixed(2).replace('.', ',');
+                    cardValor.style.color = "#d3d3d3";
+                    
+                    // Desenha o Gráfico Histórico
+                    const ctx = document.getElementById('graficoAtivo').getContext('2d');
+                    if (graficoAtivoAtual !== null) {
+                        graficoAtivoAtual.destroy();
+                    }
+
+                    graficoAtivoAtual = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: dados.periodos,
+                            datasets: [{
+                                label: `Fechamento - ${ticker}`, 
+                                data: dados.valores,
+                                borderColor: '#d3d3d3',
+                                backgroundColor: 'rgba(211, 211, 211, 0.1)',
+                                borderWidth: 2,
+                                tension: 0.1, // Linha mais "dura" para dados financeiros
+                                pointRadius: 0, // TRUQUE: Esconde os "pontinhos" para o gráfico carregar rápido e ficar limpo
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { labels: { color: '#d3d3d3' } } },
+                            scales: {
+                                x: { ticks: { color: '#a0a0a0' }, grid: { color: '#333' } },
+                                y: { ticks: { color: '#a0a0a0' }, grid: { color: '#333' } }
+                            }
+                        }
+                    });
+                })
+                .catch(erro => {
+                    console.log("Erro ao carregar os dados do ativo:", erro);
+                    cardValor.innerText = "Erro nos dados";
+                });
+        }
                     
                     listaSugestoes.appendChild(li);
                 });
