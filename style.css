@@ -56,16 +56,32 @@ body {
     margin: 0 auto;
 }
 
-header h1 {
+/* Estilos do Novo Cabeçalho com Logo */
+.cabecalho-principal {
+    display: flex;
+    align-items: center; /* Alinha a logo e os textos centralizados na vertical */
+    gap: 25px; /* Espaço entre a logo e os textos */
+    margin-bottom: 40px; /* Espaço antes de começarem os cards */
+}
+
+.imagem-logo {
+    width: 90px; /* Tamanho da logo */
+    height: 90px;
+    border-radius: 50%; /* Transforma em um círculo perfeito */
+    object-fit: cover;
+    border: 2px solid #333; /* Uma borda sutil combinando com os cards */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05); /* Um brilho bem leve ao redor */
+}
+
+.textos-header h1 {
     color: #ffffff;
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* Aproxima o título do subtítulo */
 }
 
-header p {
+.textos-header p {
     color: #a0a0a0;
-    margin-bottom: 40px;
+    margin: 0; /* Remove a margem padrão para alinhar perfeitamente */
 }
-
 /* Cards numéricos em Grid (2 linhas e 4 colunas) */
 .cards-resumo {
     display: flex;
