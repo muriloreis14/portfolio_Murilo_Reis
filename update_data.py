@@ -40,9 +40,17 @@ def atualizar_dados():
         except Exception as e:
             print(f"Erro no Yahoo ({nome}): {e}")
 
-    # --- 2. BANCO CENTRAL (Selic, IPCA, PIB) ---
-    # Correção: 22099 é o PIB Trimestral em R$ Milhões.
-    series_bcb = {"1178": "selic", "433": "ipca", "4380": "pib"}
+    # --- 2. BANCO CENTRAL (Selic, IPCA, PIB e Novos Indicadores) ---
+    series_bcb = {
+        "1178": "selic", 
+        "433": "ipca", 
+        "22099": "pib",
+        "24369": "desemprego",
+        "22701": "balanca_comercial",
+        "13762": "divida_publica",
+        "22885": "investimento_direto"
+    }
+    
     for codigo, nome in series_bcb.items():
         try:
             url = f'https://api.bcb.gov.br/dados/serie/bcdata.sgs.{codigo}/dados?formato=json&dataInicial={data_ini}&dataFinal={data_fim}'
@@ -56,17 +64,16 @@ def atualizar_dados():
                     # Agrupa os dados diários calculando a média de cada mês
                     df_bcb = df_bcb.groupby('mes', as_index=False)['valor'].mean()
                     df_final = df_bcb.tail(24)
-                    # Arredonda a taxa média para 2 casas decimais
                     df_final['valor'] = df_final['valor'].round(2)
                 elif nome == "pib":
                     # PIB é trimestral: últimos 16 registros = 4 anos
                     df_final = df_bcb.tail(16)
                 else:
-                    # IPCA é mensal natural: últimos 24 registros = 24 meses
+                    # IPCA, Desemprego, Balança, Dívida e IDP são mensais: últimos 24 registros
                     df_final = df_bcb.tail(24)
                 
                 output_json = {
-                    "nome": f"Indicador {nome.upper()}",
+                    "nome": f"Indicador {nome.upper().replace('_', ' ')}",
                     "periodos": df_final['mes'].tolist(),
                     "valores": df_final['valor'].tolist()
                 }
