@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Econômico | Análise de Ativos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Menu de Navegação -->
+    <nav class="menu-superior">
+        <div class="logo">Uma Nova Economia</div>
+        <ul class="abas">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="ativos.html" class="ativo">Análise de Ativos</a></li>
+            <li><a href="preditivos.html">Modelos Preditivos</a></li>
+            <li><a href="metodologia.html">Metodologia</a></li>
+        </ul>
+    </nav>
+
+    <main class="conteudo">
+        <header class="cabecalho-principal">
+            <div class="textos-header">
+                <h1>Análise de Ativos Corporativos</h1>
+                <p>Busque por uma empresa da B3 para visualizar seus demonstrativos (DRE/DFC) e indicadores fundamentalistas.</p>
+            </div>
+        </header>
+
+        <!-- Barra de Pesquisa com Autocomplete -->
+        <section class="busca-container">
+            <div class="busca-wrapper">
+                <input type="text" id="input-busca" placeholder="Digite o ticker (ex: WEGE3, PETR4)..." autocomplete="off">
+                <!-- A lista abaixo começa vazia e o JavaScript preenche ela -->
+                <ul id="lista-sugestoes" class="escondido"></ul>
+            </div>
+        </section>
+
+        <!-- Área onde os gráficos e tabelas da empresa vão aparecer depois -->
+        <section id="painel-empresa" style="display: none;">
+            <h2 id="titulo-empresa">Dados da Empresa</h2>
+            <!-- Colocaremos os dados do CAPEX e WACC aqui futuramente -->
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
