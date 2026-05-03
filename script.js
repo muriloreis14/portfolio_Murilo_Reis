@@ -1,74 +1,93 @@
 // Aguarda toda a estrutura do site carregar antes de executar os comandos
 document.addEventListener("DOMContentLoaded", function() {
     
-    // Captura os elementos dos cards
+    // Captura os elementos dos 8 cards
     const elementoIbov = document.getElementById("valor-ibov");
     const elementoSelic = document.getElementById("valor-selic");
     const elementoIpca = document.getElementById("valor-ipca");
     const elementoCambio = document.getElementById("valor-cambio");
+    const elementoDesemprego = document.getElementById("valor-desemprego");
+    const elementoDivida = document.getElementById("valor-divida");
+    const elementoBalanca = document.getElementById("valor-balanca");
+    const elementoIdp = document.getElementById("valor-idp");
 
-    // 1. DADOS AUTOMÁTICOS: Card do IBOVESPA
+    // 1. IBOVESPA
     fetch('base_de_dados/series_ibov.json?v=' + new Date().getTime())
-        .then(resposta => resposta.json())
+        .then(res => res.json())
         .then(dados => {
             let ultimoValor = dados.valores[dados.valores.length - 1];
             elementoIbov.innerText = ultimoValor.toLocaleString('pt-BR') + " pts";
             elementoIbov.style.color = "#d3d3d3";
-        })
-        .catch(erro => {
-            console.log("Erro IBOVESPA:", erro);
-            if(elementoIbov) elementoIbov.innerText = "Erro";
-        });
+        }).catch(() => { if(elementoIbov) elementoIbov.innerText = "Erro"; });
 
-    // 2. DADOS AUTOMÁTICOS: Card da SELIC
+    // 2. SELIC
     fetch('base_de_dados/series_selic.json?v=' + new Date().getTime())
-        .then(resposta => resposta.json())
+        .then(res => res.json())
         .then(dados => {
             let ultimoValor = dados.valores[dados.valores.length - 1];
             elementoSelic.innerText = ultimoValor + "%";
             elementoSelic.style.color = "#d3d3d3";
-        })
-        .catch(erro => {
-            console.log("Erro Selic:", erro);
-            if(elementoSelic) elementoSelic.innerText = "Erro";
-        });
+        }).catch(() => { if(elementoSelic) elementoSelic.innerText = "Erro"; });
 
-    // 3. DADOS AUTOMÁTICOS: Card do IPCA (Acumulado 12 meses)
+    // 3. IPCA (Acumulado 12 meses)
     fetch('base_de_dados/series_ipca.json?v=' + new Date().getTime())
-        .then(resposta => resposta.json())
+        .then(res => res.json())
         .then(dados => {
-            // Pega apenas os últimos 12 meses da lista
             let ultimos12 = dados.valores.slice(-12);
-            
-            // Faz o cálculo de juros compostos para a inflação acumulada
             let acumulado = 1;
             for(let i = 0; i < ultimos12.length; i++) {
                 acumulado = acumulado * (1 + (ultimos12[i] / 100));
             }
             acumulado = (acumulado - 1) * 100;
-            
-            // Formata com 2 casas decimais e vírgula
             elementoIpca.innerText = acumulado.toFixed(2).replace('.', ',') + "%";
             elementoIpca.style.color = "#d3d3d3";
-        })
-        .catch(erro => {
-            console.log("Erro IPCA:", erro);
-            if(elementoIpca) elementoIpca.innerText = "Erro";
-        });
+        }).catch(() => { if(elementoIpca) elementoIpca.innerText = "Erro"; });
 
-    // 4. DADOS AUTOMÁTICOS: Card do Câmbio (Dólar)
+    // 4. CÂMBIO
     fetch('base_de_dados/series_cambio.json?v=' + new Date().getTime())
-        .then(resposta => resposta.json())
+        .then(res => res.json())
         .then(dados => {
             let ultimoValor = dados.valores[dados.valores.length - 1];
-            // Formata o valor como moeda (Ex: R$ 4,96)
             elementoCambio.innerText = "R$ " + ultimoValor.toFixed(2).replace('.', ',');
             elementoCambio.style.color = "#d3d3d3";
-        })
-        .catch(erro => {
-            console.log("Erro Câmbio:", erro);
-            if(elementoCambio) elementoCambio.innerText = "Erro";
-        });
+        }).catch(() => { if(elementoCambio) elementoCambio.innerText = "Erro"; });
+
+    // 5. DESEMPREGO
+    fetch('base_de_dados/series_desemprego.json?v=' + new Date().getTime())
+        .then(res => res.json())
+        .then(dados => {
+            let ultimoValor = dados.valores[dados.valores.length - 1];
+            elementoDesemprego.innerText = ultimoValor + "%";
+            elementoDesemprego.style.color = "#d3d3d3";
+        }).catch(() => { if(elementoDesemprego) elementoDesemprego.innerText = "Erro"; });
+
+    // 6. DÍVIDA PÚBLICA
+    fetch('base_de_dados/series_divida_publica.json?v=' + new Date().getTime())
+        .then(res => res.json())
+        .then(dados => {
+            let ultimoValor = dados.valores[dados.valores.length - 1];
+            elementoDivida.innerText = ultimoValor + "%";
+            elementoDivida.style.color = "#d3d3d3";
+        }).catch(() => { if(elementoDivida) elementoDivida.innerText = "Erro"; });
+
+    // 7. BALANÇA COMERCIAL
+    fetch('base_de_dados/series_balanca_comercial.json?v=' + new Date().getTime())
+        .then(res => res.json())
+        .then(dados => {
+            let ultimoValor = dados.valores[dados.valores.length - 1];
+            // Formatado com ponto nos milhares
+            elementoBalanca.innerText = "US$ " + ultimoValor.toLocaleString('pt-BR');
+            elementoBalanca.style.color = "#d3d3d3";
+        }).catch(() => { if(elementoBalanca) elementoBalanca.innerText = "Erro"; });
+
+    // 8. INVESTIMENTO DIRETO
+    fetch('base_de_dados/series_investimento_direto.json?v=' + new Date().getTime())
+        .then(res => res.json())
+        .then(dados => {
+            let ultimoValor = dados.valores[dados.valores.length - 1];
+            elementoIdp.innerText = "US$ " + ultimoValor.toLocaleString('pt-BR');
+            elementoIdp.style.color = "#d3d3d3";
+        }).catch(() => { if(elementoIdp) elementoIdp.innerText = "Erro"; });
 
     // --- MOTOR INTELIGENTE DO GRÁFICO ---
     const seletor = document.getElementById("seletor-indicador");
