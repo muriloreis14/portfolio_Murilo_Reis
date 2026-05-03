@@ -10,7 +10,7 @@ def atualizar_dados():
     os.makedirs('arquivos_download', exist_ok=True)
     
     fim_dt = datetime.now()
-    # Aumentamos a janela inicial para pouco mais de 4 anos (1550 dias) para cobrir o PIB
+    # Janela inicial ampla para garantir os 4 anos de PIB
     ini_dt = fim_dt - timedelta(days=1550)
     data_fim = fim_dt.strftime('%d/%m/%Y')
     data_ini = ini_dt.strftime('%d/%m/%Y')
@@ -25,10 +25,9 @@ def atualizar_dados():
                 df.columns = ['data', 'valor']
                 df['data'] = df['data'].dt.strftime('%Y-%m')
                 
-                # Filtra exatamente os últimos 24 meses
+                # Filtra os últimos 24 meses
                 df = df.tail(24)
                 
-                # Salva JSON
                 output_json = {
                     "nome": f"Série {nome.upper()}",
                     "periodos": df['data'].tolist(),
@@ -37,12 +36,12 @@ def atualizar_dados():
                 with open(f'base_de_dados/series_{nome}.json', 'w', encoding='utf-8') as f:
                     json.dump(output_json, f, indent=4)
                 
-                # Salva CSV
                 df.to_csv(f'arquivos_download/series_{nome}.csv', index=False, sep=';', encoding='utf-8-sig')
         except Exception as e:
             print(f"Erro no Yahoo ({nome}): {e}")
 
     # --- 2. BANCO CENTRAL (Selic, IPCA, PIB) ---
+    # Correção: 22099 é o PIB Trimestral em R$ Milhões.
     series_bcb = {"1178": "selic", "433": "ipca", "4380": "pib"}
     for codigo, nome in series_bcb.items():
         try:
@@ -52,12 +51,18 @@ def atualizar_dados():
                 df_bcb['data'] = pd.to_datetime(df_bcb['data'], dayfirst=True)
                 df_bcb['mes'] = df_bcb['data'].dt.strftime('%Y-%m')
                 
-                # Lógica para separar os prazos
-                if nome == "pib":
-                    # PIB é trimestral: 4 anos = últimos 16 registros
+                # LÓGICA DE AGRUPAMENTO E PRAZOS
+                if nome == "selic":
+                    # Agrupa os dados diários calculando a média de cada mês
+                    df_bcb = df_bcb.groupby('mes', as_index=False)['valor'].mean()
+                    df_final = df_bcb.tail(24)
+                    # Arredonda a taxa média para 2 casas decimais
+                    df_final['valor'] = df_final['valor'].round(2)
+                elif nome == "pib":
+                    # PIB é trimestral: últimos 16 registros = 4 anos
                     df_final = df_bcb.tail(16)
                 else:
-                    # Selic e IPCA são mensais: últimos 24 registros
+                    # IPCA é mensal natural: últimos 24 registros = 24 meses
                     df_final = df_bcb.tail(24)
                 
                 output_json = {
