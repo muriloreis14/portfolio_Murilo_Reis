@@ -34,7 +34,7 @@ jobs:
 
       # 4. Executa o script de Macroeconomia (IPEA/BC)
       - name: Atualizar Indicadores Macro
-        run: python atualiza.py
+        run: atualiza_acoes.py
 
       # 5. Executa o script de Ações (Yahoo Finance - Histórico Máximo)
       # Este é o script que criará os arquivos individuais na pasta base_de_dados/ativos
