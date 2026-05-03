@@ -31,7 +31,6 @@
         <section class="busca-container">
             <div class="busca-wrapper">
                 <input type="text" id="input-busca" placeholder="Digite o ticker (ex: WEGE3, PETR4)..." autocomplete="off">
-                <!-- A lista abaixo começa vazia e o JavaScript preenche ela -->
                 <ul id="lista-sugestoes" class="escondido"></ul>
             </div>
         </section>
@@ -58,11 +57,10 @@
                 <canvas id="graficoAtivo"></canvas>
             </div>
         </section>
-            <h2 id="titulo-empresa">Dados da Empresa</h2>
-            <!-- Colocaremos os dados do CAPEX e WACC aqui futuramente -->
-        </section>
     </main>
 
+    <!-- IMPORTAÇÃO DO CHART.JS (A "caneta" que faltava!) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
