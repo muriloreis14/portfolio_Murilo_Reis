@@ -32,16 +32,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install yfinance pandas requests
 
-      # 4. Executa o script de Macroeconomia (IPEA/BC)
-      - name: Atualizar Indicadores Macro
-        run: python atualiza_acoes.py
-
-      # 5. Executa o script de Ações (Yahoo Finance - Histórico Máximo)
+      # 4. Executa o script de Ações (Yahoo Finance - Histórico Máximo)
       # Este é o script que criará os arquivos individuais na pasta base_de_dados/ativos
       - name: Atualizar Histórico de Ativos
         run: python atualiza_acoes.py
 
-      # 6. Salva as alterações e envia de volta para o seu GitHub
+      # 5. Salva as alterações e envia de volta para o seu GitHub
       - name: Commit e Push das atualizações
         run: |
           git config --global user.name "github-actions[bot]"
