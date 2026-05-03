@@ -1,4 +1,33 @@
-<!-- Resumos numéricos: 2 linhas com 4 cards -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Econômico | Visão Geral</title>
+    <!-- Conecta o HTML ao visual (CSS) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Menu de Navegação -->
+    <nav class="menu-superior">
+        <div class="logo">Uma Nova Economia</div>
+        <ul class="abas">
+            <li><a href="index.html" class="ativo">Home</a></li>
+            <li><a href="ativos.html">Análise de Ativos</a></li>
+            <li><a href="preditivos.html">Modelos Preditivos</a></li>
+            <li><a href="metodologia.html">Metodologia</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo Principal da Home -->
+    <main class="conteudo">
+        <header>
+            <h1>Visão Geral do Mercado</h1>
+            <p>Acompanhamento de indicadores econômicos e bolsa de valores atualizados de hora em hora.</p>
+        </header>
+
+        <!-- Resumos numéricos: 2 linhas com 4 cards -->
         <section class="cards-resumo">
             <div class="card">
                 <h3>IBOVESPA</h3>
@@ -40,6 +69,7 @@
             <div class="cabecalho-grafico">
                 <h2>Análise Histórica</h2>
                 <select id="seletor-indicador" class="caixa-selecao">
+                    <!-- O valor (value) aponta exatamente para os arquivos que o seu robô criou -->
                     <option value="base_de_dados/series_ibov.json">IBOVESPA</option>
                     <option value="base_de_dados/series_selic.json">Taxa Selic</option>
                     <option value="base_de_dados/series_ipca.json">Inflação (IPCA)</option>
@@ -51,3 +81,12 @@
                     <option value="base_de_dados/series_investimento_direto.json">Investimento Direto</option>
                 </select>
             </div>
+            <canvas id="graficoPib"></canvas>
+        </section>
+    </main>
+
+    <!-- Importando o Chart.js e conectando o nosso script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
