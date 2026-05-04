@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }).catch(() => { elementoIdp.innerText = "Erro"; });
     }
 
-    // --- MOTOR INTELIGENTE DO GRÁFICO ---
+    // --- MOTOR INTELIGENTE DO GRÁFICO DA HOME ---
     const seletor = document.getElementById("seletor-indicador");
     let graficoAtual = null;
 
@@ -158,10 +158,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const inputBusca = document.getElementById("input-busca");
     const listaSugestoes = document.getElementById("lista-sugestoes");
 
-    // Variável global para o gráfico de ativos
+    // Variáveis globais para o painel de ativos
     let graficoAtivoAtual = null;
+    let dadosCompletosAtivo = null; // Vai guardar a história toda para o filtro
 
-    // Função que busca os dados e desenha o painel (Agora no lugar certo!)
+    // Função que desenha o gráfico inicial
     function carregarDadosAtivo(ticker) {
         const painel = document.getElementById("painel-empresa");
         const tituloAtivo = document.getElementById("titulo-empresa");
@@ -171,9 +172,17 @@ document.addEventListener("DOMContentLoaded", function() {
         tituloAtivo.innerText = ticker;
         cardValor.innerText = "Carregando...";
 
+        // Reseta os botões para o padrão MÁX
+        document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
+        const btnMax = document.querySelector('.btn-filtro[data-periodo="MAX"]');
+        if (btnMax) btnMax.classList.add('ativo');
+
         fetch(`base_de_dados/ativos/${ticker}.json?v=` + new Date().getTime())
             .then(res => res.json())
             .then(dados => {
+                // Salva os dados na variável global para podermos filtrar depois
+                dadosCompletosAtivo = dados;
+
                 let ultimoPreco = dados.valores[dados.valores.length - 1];
                 cardValor.innerText = "R$ " + ultimoPreco.toFixed(2).replace('.', ',');
                 cardValor.style.color = "#d3d3d3";
@@ -209,10 +218,44 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             })
             .catch(erro => {
-                console.log("Erro ao carregar os dados do ativo:", erro);
+                console.log("Erro:", erro);
                 cardValor.innerText = "Erro nos dados";
             });
     }
+
+    // --- NOVA LÓGICA: FILTRO DE TEMPO DO GRÁFICO ---
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('btn-filtro')) {
+            // Se o gráfico ainda não carregou, ignora
+            if (!dadosCompletosAtivo || !graficoAtivoAtual) return;
+
+            // Muda a cor do botão clicado
+            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
+            e.target.classList.add('ativo');
+
+            const periodo = e.target.getAttribute('data-periodo');
+            const totalDias = dadosCompletosAtivo.periodos.length;
+            let diasParaMostrar = totalDias;
+
+            // Matemática de mercado: corta pela quantidade de pregões úteis
+            if (periodo === '1S') diasParaMostrar = 5;
+            else if (periodo === '1M') diasParaMostrar = 21;
+            else if (periodo === '1A') diasParaMostrar = 252;
+            else if (periodo === '5A') diasParaMostrar = 1260;
+
+            // Evita erro se a empresa for muito nova e não tiver 5 anos de bolsa
+            if (diasParaMostrar > totalDias) diasParaMostrar = totalDias;
+
+            // Corta as listas pegando apenas o final (dias mais recentes)
+            const periodosFiltrados = dadosCompletosAtivo.periodos.slice(-diasParaMostrar);
+            const valoresFiltrados = dadosCompletosAtivo.valores.slice(-diasParaMostrar);
+
+            // Atualiza o gráfico na tela suavemente
+            graficoAtivoAtual.data.labels = periodosFiltrados;
+            graficoAtivoAtual.data.datasets[0].data = valoresFiltrados;
+            graficoAtivoAtual.update();
+        }
+    });
 
     // Lógica que escuta a digitação na barra
     if (inputBusca && listaSugestoes) {
@@ -264,4 +307,4 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-}); // Fecha o document.addEventListener lá do início
+});
