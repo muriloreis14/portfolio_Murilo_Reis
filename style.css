@@ -193,3 +193,34 @@ body {
     background-color: #333;
     color: #ffffff;
 }
+
+/* --- FILTROS DE TEMPO DO GRÁFICO DE ATIVOS --- */
+.filtros-tempo {
+    display: flex;
+    gap: 5px;
+    background-color: #121212;
+    padding: 4px;
+    border-radius: 6px;
+    border: 1px solid #333;
+}
+
+.btn-filtro {
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.btn-filtro:hover {
+    color: #ffffff;
+}
+
+.btn-filtro.ativo {
+    background-color: #333;
+    color: #ffffff;
+}
