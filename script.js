@@ -167,6 +167,37 @@ document.addEventListener("DOMContentLoaded", function() {
         const painel = document.getElementById("painel-empresa");
         const tituloAtivo = document.getElementById("titulo-empresa");
         const cardValor = document.getElementById("valor-ativo");
+        // --- NOVO: BUSCADOR DE NOTÍCIAS ---
+        const listaNoticias = document.getElementById("lista-noticias");
+        listaNoticias.innerHTML = "<li>Carregando notícias...</li>";
+
+        // Tenta buscar o arquivo de notícias que seu robô Python vai gerar no futuro
+        fetch(`base_de_dados/noticias/${ticker}.json?v=` + new Date().getTime())
+            .then(res => res.json())
+            .then(noticias => {
+                listaNoticias.innerHTML = ""; // Limpa a mensagem de "carregando"
+                
+                if (noticias.length === 0) {
+                    listaNoticias.innerHTML = "<li>Nenhuma notícia recente encontrada.</li>";
+                    return;
+                }
+
+                // Pega no máximo as 10 primeiras notícias (caso o arquivo tenha mais)
+                const limiteNoticias = noticias.slice(0, 10);
+
+                limiteNoticias.forEach(noticia => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                        <span class="data-fonte">${noticia.data} • ${noticia.fonte}</span>
+                        <a href="${noticia.link}" target="_blank" class="link-noticia">${noticia.titulo}</a>
+                    `;
+                    listaNoticias.appendChild(li);
+                });
+            })
+            .catch(() => {
+                // Se o arquivo ainda não existir, exibe essa mensagem sutil
+                listaNoticias.innerHTML = "<li>O robô de notícias ainda não coletou dados para este ativo.</li>";
+            });
         
         // Captura o elemento da imagem da logo
         const logoEmpresa = document.getElementById("logo-empresa");
