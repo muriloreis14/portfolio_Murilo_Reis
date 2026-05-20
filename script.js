@@ -293,7 +293,16 @@ document.addEventListener("DOMContentLoaded", function() {
         
         fetch('base_de_dados/lista_ativos.json?v=' + new Date().getTime())
             .then(res => res.json())
-            .then(dados => ativosB3 = dados.tickers)
+            .then(dados => {
+                // Verifica se o arquivo é uma lista direta ex: ["WEGE3", "PETR4"]
+                if (Array.isArray(dados)) {
+                    ativosB3 = dados;
+                } 
+                // Verifica se é um dicionário ex: {"tickers": ["WEGE3", "PETR4"]}
+                else if (dados.tickers) {
+                    ativosB3 = dados.tickers;
+                }
+            })
             .catch(erro => console.log("Erro ao carregar lista_ativos.json:", erro));
 
         inputBusca.addEventListener("input", function() {
