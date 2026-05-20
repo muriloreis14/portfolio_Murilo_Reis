@@ -39,11 +39,46 @@
         <section id="painel-empresa" style="display: none;">
             
             <div style="border-bottom: 2px solid #333; margin-bottom: 30px; padding-bottom: 10px; display: flex; align-items: center; gap: 15px;">
-                
                 <img id="logo-empresa" src="" alt="Logo" style="display: none; width: 50px; height: 50px; border-radius: 8px; object-fit: contain; background-color: #fff; padding: 4px;">
-                
                 <h2 id="titulo-empresa" style="color: #ffffff; font-size: 28px; margin: 0;">Ativo Selecionado</h2>
             </div>
+            
+            <div class="layout-duas-colunas">
+                
+                <div class="coluna-esquerda">
+                    <div class="cards-resumo" style="margin-bottom: 30px;">
+                        <div class="card" style="width: 300px;">
+                            <h3>Preço de Fechamento (Atual)</h3>
+                            <p class="valor" id="valor-ativo">Carregando...</p>
+                        </div>
+                    </div>
+
+                    <div class="grafico-container" style="margin-top: 0;">
+                        <div class="cabecalho-grafico" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h2 style="margin-bottom: 0;">Histórico de Preços</h2>
+                            <div class="filtros-tempo" id="filtros-tempo">
+                                <button class="btn-filtro" data-periodo="1S">1S</button>
+                                <button class="btn-filtro" data-periodo="1M">1M</button>
+                                <button class="btn-filtro" data-periodo="1A">1A</button>
+                                <button class="btn-filtro" data-periodo="5A">5A</button>
+                                <button class="btn-filtro ativo" data-periodo="MAX">MÁX</button>
+                            </div>
+                        </div>
+                        <canvas id="graficoAtivo"></canvas>
+                    </div>
+                </div>
+
+                <div class="coluna-direita">
+                    <div class="painel-noticias">
+                        <h3>Últimas Notícias</h3>
+                        <ul id="lista-noticias" class="lista-noticias">
+                            <li>Aguardando dados...</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
             
             <!-- Card de Preço Atual -->
             <div class="cards-resumo" style="margin-bottom: 30px;">
