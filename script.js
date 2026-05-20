@@ -183,12 +183,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
 
                 // Pega no máximo as 10 primeiras notícias (caso o arquivo tenha mais)
-                const limiteNoticias = noticias.slice(0, 10);
+                const limiteNoticias = noticias.slice(0, 12);
 
                 limiteNoticias.forEach(noticia => {
                     const li = document.createElement("li");
                     li.innerHTML = `
-                        <span class="data-fonte">${noticia.data} • ${noticia.fonte}</span>
+                        <span class="data-fonte">
+                            ${noticia.data} • <span class="destaque-fonte">${noticia.fonte}</span>
+                        </span>
                         <a href="${noticia.link}" target="_blank" class="link-noticia">${noticia.titulo}</a>
                     `;
                     listaNoticias.appendChild(li);
