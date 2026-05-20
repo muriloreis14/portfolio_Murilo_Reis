@@ -287,26 +287,36 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // LÓGICA DE AUTOCOMPLETE DA BARRA DE PESQUISA
+   // LÓGICA DE AUTOCOMPLETE DA BARRA DE PESQUISA
+    // ==============================================================
     if (inputBusca && listaSugestoes) {
         let ativosB3 = [];
+        
+        console.log("1. Iniciando o download da lista de ativos...");
         
         fetch('base_de_dados/lista_ativos.json?v=' + new Date().getTime())
             .then(res => res.json())
             .then(dados => {
-                // Verifica se o arquivo é uma lista direta ex: ["WEGE3", "PETR4"]
+                console.log("2. O que veio do arquivo JSON?", dados);
+
+                // Tenta descobrir o formato do arquivo
                 if (Array.isArray(dados)) {
                     ativosB3 = dados;
-                } 
-                // Verifica se é um dicionário ex: {"tickers": ["WEGE3", "PETR4"]}
-                else if (dados.tickers) {
+                } else if (dados.tickers) {
                     ativosB3 = dados.tickers;
+                } else {
+                    console.log("⚠️ AVISO: O arquivo carregou, mas não tem o formato esperado.");
                 }
+                
+                console.log("3. Lista final salva na memória:", ativosB3);
             })
             .catch(erro => console.log("Erro ao carregar lista_ativos.json:", erro));
 
         inputBusca.addEventListener("input", function() {
-            const textoDigitado = inputBusca.value.toUpperCase(); 
+            // O .trim() remove espaços acidentais que você possa ter digitado
+            const textoDigitado = inputBusca.value.trim().toUpperCase(); 
+            
+            console.log("4. Você digitou:", textoDigitado);
             
             if (textoDigitado === "") {
                 listaSugestoes.innerHTML = "";
@@ -315,6 +325,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             const resultados = ativosB3.filter(ativo => ativo.startsWith(textoDigitado));
+            console.log("5. Ações encontradas:", resultados);
+
             listaSugestoes.innerHTML = "";
             
             if (resultados.length > 0) {
@@ -343,4 +355,3 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-});
