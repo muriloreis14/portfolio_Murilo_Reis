@@ -1,7 +1,7 @@
 // Aguarda toda a estrutura do site carregar antes de executar os comandos
 document.addEventListener("DOMContentLoaded", function() {
     
-    // Captura os elementos dos 8 cards
+    // Captura os elementos dos 8 cards da Home
     const elementoIbov = document.getElementById("valor-ibov");
     const elementoSelic = document.getElementById("valor-selic");
     const elementoIpca = document.getElementById("valor-ipca");
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }).catch(() => { elementoIdp.innerText = "Erro"; });
     }
 
-    // --- MOTOR INTELIGENTE DO GRÁFICO DA HOME ---
+    // --- MOTOR DO GRÁFICO DA HOME ---
     const seletor = document.getElementById("seletor-indicador");
     let graficoAtual = null;
 
@@ -112,7 +112,10 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch(nomeDoArquivo + '?v=' + new Date().getTime())
             .then(resposta => resposta.json())
             .then(dados => {
-                const ctx = document.getElementById('graficoPib').getContext('2d');
+                const elementoCanvas = document.getElementById('graficoPib');
+                if (!elementoCanvas) return;
+                
+                const ctx = elementoCanvas.getContext('2d');
 
                 if (graficoAtual !== null) {
                     graficoAtual.destroy();
@@ -142,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 });
             })
-            .catch(erro => console.log("Erro ao desenhar o gráfico:", erro));
+            .catch(erro => console.log("Erro ao desenhar o gráfico da home:", erro));
     }
 
     if (seletor) {
@@ -153,39 +156,51 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // ==============================================================
-    // --- LÓGICA DA BARRA DE BUSCA (PÁGINA: ANÁLISE DE ATIVOS) ---
+    // --- LÓGICA DO PAINEL DE ATIVOS (ANÁLISE DE ATIVOS) ---
     // ==============================================================
     const inputBusca = document.getElementById("input-busca");
     const listaSugestoes = document.getElementById("lista-sugestoes");
 
-    // Variáveis globais para o painel de ativos
     let graficoAtivoAtual = null;
-    let dadosCompletosAtivo = null; // Vai guardar a história toda para o filtro
+    let dadosCompletosAtivo = null; 
 
-    // Função que desenha o gráfico inicial
     function carregarDadosAtivo(ticker) {
         const painel = document.getElementById("painel-empresa");
         const tituloAtivo = document.getElementById("titulo-empresa");
         const cardValor = document.getElementById("valor-ativo");
-        // --- NOVO: BUSCADOR DE NOTÍCIAS ---
+        const logoEmpresa = document.getElementById("logo-empresa");
         const listaNoticias = document.getElementById("lista-noticias");
+
+        if (!painel) return;
+
+        // Ativa visibilidade e limpa estados anteriores
+        painel.style.display = "block"; 
+        tituloAtivo.innerText = ticker;
+        cardValor.innerText = "Carregando...";
         listaNoticias.innerHTML = "<li>Carregando notícias...</li>";
 
-        // Tenta buscar o arquivo de notícias que seu robô Python vai gerar no futuro
+        // 1. LOGO DINÂMICA VIA LINK EXTERNO B3
+        logoEmpresa.src = `https://raw.githubusercontent.com/thefintz/icones-b3/main/icones/${ticker}.png`;
+        logoEmpresa.style.display = "block";
+        logoEmpresa.onerror = function() {
+            this.style.display = "none";
+        };
+
+        // Reseta botões de filtro temporal para MÁX
+        document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
+        const btnMax = document.querySelector('.btn-filtro[data-periodo="MAX"]');
+        if (btnMax) btnMax.classList.add('ativo');
+
+        // 2. FETCH DE NOTÍCIAS (PRÉ-PROCESSADO PYTHON)
         fetch(`base_de_dados/noticias/${ticker}.json?v=` + new Date().getTime())
             .then(res => res.json())
             .then(noticias => {
-                listaNoticias.innerHTML = ""; // Limpa a mensagem de "carregando"
-                
+                listaNoticias.innerHTML = "";
                 if (noticias.length === 0) {
                     listaNoticias.innerHTML = "<li>Nenhuma notícia recente encontrada.</li>";
                     return;
                 }
-
-                // Pega no máximo as 10 primeiras notícias (caso o arquivo tenha mais)
-                const limiteNoticias = noticias.slice(0, 10);
-
-                limiteNoticias.forEach(noticia => {
+                noticias.slice(0, 10).forEach(noticia => {
                     const li = document.createElement("li");
                     li.innerHTML = `
                         <span class="data-fonte">${noticia.data} • ${noticia.fonte}</span>
@@ -195,35 +210,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             })
             .catch(() => {
-                // Se o arquivo ainda não existir, exibe essa mensagem sutil
                 listaNoticias.innerHTML = "<li>O robô de notícias ainda não coletou dados para este ativo.</li>";
             });
-        
-        // Captura o elemento da imagem da logo
-        const logoEmpresa = document.getElementById("logo-empresa");
-        
-        painel.style.display = "block"; 
-        tituloAtivo.innerText = ticker;
-        cardValor.innerText = "Carregando...";
 
-        // --- A MÁGICA DA LOGO EXTERNA AQUI ---
-        // Junta o link base com o nome do ticker e a extensão .png
-        logoEmpresa.src = `https://raw.githubusercontent.com/thefintz/icones-b3/main/icones/${ticker}.png`;
-        logoEmpresa.style.display = "block"; // Mostra a imagem
-
-        // Prevenção de erro: Se a logo não existir lá no repositório thefintz, esconde o ícone quebrado
-        logoEmpresa.onerror = function() {
-            this.style.display = "none";
-        };
-
-        // Reseta os botões para o padrão MÁX
-        document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
-        const btnMax = document.querySelector('.btn-filtro[data-periodo="MAX"]');
-        if (btnMax) btnMax.classList.add('ativo');
+        // 3. FETCH DE PREÇOS HISTÓRICOS DA AÇÃO
         fetch(`base_de_dados/ativos/${ticker}.json?v=` + new Date().getTime())
             .then(res => res.json())
             .then(dados => {
-                // Salva os dados na variável global para podermos filtrar depois
                 dadosCompletosAtivo = dados;
 
                 let ultimoPreco = dados.valores[dados.valores.length - 1];
@@ -261,18 +254,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             })
             .catch(erro => {
-                console.log("Erro:", erro);
+                console.log("Erro ao carregar os dados de preço:", erro);
                 cardValor.innerText = "Erro nos dados";
             });
     }
 
-    // --- NOVA LÓGICA: FILTRO DE TEMPO DO GRÁFICO ---
+    // LÓGICA DOS FILTROS TEMPORAIS (1S, 1M, 1A, 5A, MÁX)
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('btn-filtro')) {
-            // Se o gráfico ainda não carregou, ignora
             if (!dadosCompletosAtivo || !graficoAtivoAtual) return;
 
-            // Muda a cor do botão clicado
             document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
             e.target.classList.add('ativo');
 
@@ -280,34 +271,30 @@ document.addEventListener("DOMContentLoaded", function() {
             const totalDias = dadosCompletosAtivo.periodos.length;
             let diasParaMostrar = totalDias;
 
-            // Matemática de mercado: corta pela quantidade de pregões úteis
             if (periodo === '1S') diasParaMostrar = 5;
             else if (periodo === '1M') diasParaMostrar = 21;
             else if (periodo === '1A') diasParaMostrar = 252;
             else if (periodo === '5A') diasParaMostrar = 1260;
 
-            // Evita erro se a empresa for muito nova e não tiver 5 anos de bolsa
             if (diasParaMostrar > totalDias) diasParaMostrar = totalDias;
 
-            // Corta as listas pegando apenas o final (dias mais recentes)
             const periodosFiltrados = dadosCompletosAtivo.periodos.slice(-diasParaMostrar);
             const valoresFiltrados = dadosCompletosAtivo.valores.slice(-diasParaMostrar);
 
-            // Atualiza o gráfico na tela suavemente
             graficoAtivoAtual.data.labels = periodosFiltrados;
             graficoAtivoAtual.data.datasets[0].data = valoresFiltrados;
             graficoAtivoAtual.update();
         }
     });
 
-    // Lógica que escuta a digitação na barra
+    // LÓGICA DE AUTOCOMPLETE DA BARRA DE PESQUISA
     if (inputBusca && listaSugestoes) {
         let ativosB3 = [];
-
+        
         fetch('base_de_dados/lista_ativos.json?v=' + new Date().getTime())
             .then(res => res.json())
             .then(dados => ativosB3 = dados.tickers)
-            .catch(erro => console.log("Erro ao carregar a lista de ativos:", erro));
+            .catch(erro => console.log("Erro ao carregar lista_ativos.json:", erro));
 
         inputBusca.addEventListener("input", function() {
             const textoDigitado = inputBusca.value.toUpperCase(); 
@@ -330,8 +317,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         inputBusca.value = ativo; 
                         listaSugestoes.innerHTML = ""; 
                         listaSugestoes.classList.add("escondido");
-                        
-                        // Chama a função organizada lá em cima
                         carregarDadosAtivo(ativo);
                     });
                     
@@ -349,5 +334,4 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-
 });
