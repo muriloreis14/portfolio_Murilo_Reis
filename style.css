@@ -224,3 +224,81 @@ body {
     background-color: #333;
     color: #ffffff;
 }
+
+/* =========================================
+   LAYOUT DUAS COLUNAS (PÁGINA ATIVOS)
+========================================= */
+.layout-duas-colunas {
+    display: flex;
+    gap: 30px; /* Espaço entre o gráfico e as notícias */
+    align-items: flex-start; /* Impede que a barra lateral estique desnecessariamente */
+}
+
+.coluna-esquerda {
+    flex: 2; /* Ocupa 2/3 do espaço da tela */
+    min-width: 0; /* Previne bugs do Chart.js estourando a tela */
+}
+
+.coluna-direita {
+    flex: 1; /* Ocupa 1/3 do espaço (a barra lateral) */
+    min-width: 300px;
+}
+
+/* Painel Lateral de Notícias */
+.painel-noticias {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.painel-noticias h3 {
+    color: #d3d3d3;
+    font-size: 16px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.lista-noticias {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-noticias li {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.lista-noticias li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.data-fonte {
+    font-size: 11px;
+    color: #a0a0a0;
+    margin-bottom: 6px;
+    display: block;
+    font-weight: bold;
+}
+
+.link-noticia {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.4;
+    transition: 0.2s;
+    display: block; /* Para a área de clique ficar maior */
+}
+
+.link-noticia:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
