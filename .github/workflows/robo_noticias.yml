@@ -1,15 +1,14 @@
 name: Robô de Notícias
 
 on:
-  # Define de quanto em quanto tempo o robô vai rodar sozinho
-  # O formato abaixo significa: rodar a cada 4 horas.
+  # Define que o robô roda sozinho a cada 4 horas
   schedule:
     - cron: '0 */4 * * *' 
   
-  # Esse comando cria um botão no GitHub para você rodar o script manualmente quando quiser
+  # Cria o botão no GitHub para você rodar manualmente
   workflow_dispatch: 
 
-# Essencial: dá permissão para o robô do GitHub salvar arquivos no seu repositório
+# Dá permissão para o robô salvar arquivos no repositório
 permissions:
   contents: write 
 
@@ -28,7 +27,7 @@ jobs:
       with:
         python-version: '3.10'
 
-    # 3. Instala a biblioteca do Yahoo Finance
+    # 3. Instala dependências (Mantivemos o yfinance caso precise no futuro)
     - name: Instalar dependências
       run: |
         pip install yfinance
@@ -37,15 +36,15 @@ jobs:
     - name: Executar o robô de notícias
       run: python atualiza_noticias.py
 
-   # 5. Salva os novos arquivos JSON gerados e envia para o repositório
+    # 5. Salva a nova pasta gerada e envia para o GitHub de forma segura
     - name: Commit e Push dos resultados
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         
-        # Adiciona todas as modificações de forma segura (não trava se estiver vazio)
-        git add .
+        # Pega a pasta inteira, não apenas os arquivos json
+        git add base_de_dados/noticias/
         
-        # O '|| true' no final evita que o GitHub acuse erro se o robô rodar e não houver nenhuma notícia nova
-        git commit -m "Atualizando base de notícias via GitHub Actions" || true
+        # O '|| echo' evita a tela vermelha caso já esteja tudo atualizado e sem matérias novas
+        git commit -m "Atualizando base de notícias via GitHub Actions" || echo "Sem alterações para commit"
         git push
