@@ -4,13 +4,27 @@ import urllib.request
 import xml.etree.ElementTree as ET
 import email.utils
 
+# 1. TESTE DE CAMINHO
+# Vamos imprimir onde o robô acha que está rodando
+print(f"Diretório atual: {os.getcwd()}")
+print(f"Arquivos na pasta atual: {os.listdir('.')}")
+
 # Define os caminhos
 caminho_lista = 'base_de_dados/lista_ativos.json'
 pasta_noticias = 'base_de_dados/noticias'
 
-# Garante que a pasta de notícias existe
-os.makedirs(pasta_noticias, exist_ok=True)
+# 2. VERIFICAÇÃO DE EXISTÊNCIA
+if not os.path.exists(caminho_lista):
+    print(f"ERRO CRÍTICO: O arquivo {caminho_lista} não foi encontrado!")
+    exit(1) # Para o robô aqui e mostra o erro no log
 
+# Garante que a pasta de notícias existe
+try:
+    os.makedirs(pasta_noticias, exist_ok=True)
+    print(f"Pasta '{pasta_noticias}' verificada/criada com sucesso.")
+except Exception as e:
+    print(f"ERRO AO CRIAR PASTA: {e}")
+    exit(1)
 # 1. Abre a lista de ativos
 with open(caminho_lista, 'r', encoding='utf-8') as f:
     dados_lista = json.load(f)
