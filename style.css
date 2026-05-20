@@ -19,13 +19,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #d3d3d3; /* Linha cinza claro */
+    border-bottom: 2px solid #d3d3d3;
 }
 
 .logo {
     font-size: 24px;
     font-weight: bold;
-    color: #d3d3d3; /* Nome em cinza claro */
+    color: #d3d3d3;
 }
 
 .abas {
@@ -44,8 +44,8 @@ body {
 }
 
 .abas li a:hover, .abas li a.ativo {
-    background-color: #d3d3d3; /* Fundo cinza claro ao passar o mouse */
-    color: #121212; /* Texto escuro para dar contraste */
+    background-color: #d3d3d3;
+    color: #121212;
     font-weight: bold;
 }
 
@@ -59,43 +59,43 @@ body {
 /* Estilos do Novo Cabeçalho com Logo */
 .cabecalho-principal {
     display: flex;
-    align-items: center; /* Alinha a logo e os textos centralizados na vertical */
-    gap: 25px; /* Espaço entre a logo e os textos */
-    margin-bottom: 40px; /* Espaço antes de começarem os cards */
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 40px;
 }
 
 .imagem-logo {
-    width: 90px; /* Tamanho da logo */
+    width: 90px;
     height: 90px;
-    border-radius: 50%; /* Transforma em um círculo perfeito */
+    border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #333; /* Uma borda sutil combinando com os cards */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05); /* Um brilho bem leve ao redor */
+    border: 2px solid #333;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
 }
 
 .textos-header h1 {
     color: #ffffff;
-    margin-bottom: 5px; /* Aproxima o título do subtítulo */
+    margin-bottom: 5px;
 }
 
 .textos-header p {
     color: #a0a0a0;
-    margin: 0; /* Remove a margem padrão para alinhar perfeitamente */
+    margin: 0;
 }
+
 /* Cards numéricos em Grid (2 linhas e 4 colunas) */
 .cards-resumo {
     display: flex;
-    flex-wrap: wrap; /* Permite que os cards caiam para a linha de baixo */
+    flex-wrap: wrap;
     gap: 20px;
-    margin-bottom: 40px; /* Empurra o container do gráfico mais para baixo */
+    margin-bottom: 40px;
 }
 
 .card {
     background-color: #1e1e1e;
     padding: 20px;
     border-radius: 8px;
-    /* A matemática exata: 25% da tela menos o espaço do gap para caberem 4 cravados */
-    width: calc(25% - 15px); 
+    width: calc(25% - 15px);
     border: 1px solid #333;
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
@@ -111,7 +111,7 @@ body {
 .valor {
     font-size: 28px;
     font-weight: bold;
-    color: #d3d3d3; /* Números em cinza claro */
+    color: #d3d3d3;
 }
 
 /* Container do Gráfico */
@@ -119,7 +119,7 @@ body {
     background-color: #1e1e1e;
     padding: 20px;
     border-radius: 8px;
-    margin-top: 30px; /* Dá um espaço entre os cards e o gráfico */
+    margin-top: 30px;
     border: 1px solid #333;
     box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
@@ -172,7 +172,7 @@ body {
     list-style: none;
     margin-top: 4px;
     max-height: 250px;
-    overflow-y: auto; /* Cria barra de rolagem se tiver muitos ativos */
+    overflow-y: auto;
     z-index: 10;
     box-shadow: 0 8px 15px rgba(0,0,0,0.5);
 }
@@ -231,17 +231,17 @@ body {
 ========================================= */
 .layout-duas-colunas {
     display: flex;
-    gap: 30px; /* Espaço entre o gráfico e as notícias */
-    align-items: flex-start; /* Impede que a barra lateral estique desnecessariamente */
+    gap: 30px;
+    align-items: flex-start;
 }
 
 .coluna-esquerda {
-    flex: 2; /* Ocupa 2/3 do espaço da tela */
-    min-width: 0; /* Previne bugs do Chart.js estourando a tela */
+    flex: 2;
+    min-width: 0;
 }
 
 .coluna-direita {
-    flex: 1; /* Ocupa 1/3 do espaço (a barra lateral) */
+    flex: 1;
     min-width: 300px;
 }
 
@@ -296,7 +296,7 @@ body {
     font-size: 14px;
     line-height: 1.4;
     transition: 0.2s;
-    display: block; /* Para a área de clique ficar maior */
+    display: block;
 }
 
 .link-noticia:hover {
