@@ -8,6 +8,7 @@
 </head>
 <body>
 
+    <!-- Menu de Navegação -->
     <nav class="menu-superior">
         <div class="logo">Uma Nova Economia</div>
         <ul class="abas">
@@ -26,6 +27,7 @@
             </div>
         </header>
 
+        <!-- Barra de Pesquisa com Autocomplete -->
         <section class="busca-container">
             <div class="busca-wrapper">
                 <input type="text" id="input-busca" placeholder="Digite o ticker (ex: WEGE3, PETR4)..." autocomplete="off">
@@ -33,6 +35,7 @@
             </div>
         </section>
 
+        <!-- Área onde os gráficos e tabelas da empresa vão aparecer -->
         <section id="painel-empresa" style="display: none;">
             
             <div style="border-bottom: 2px solid #333; margin-bottom: 30px; padding-bottom: 10px; display: flex; align-items: center; gap: 15px;">
@@ -76,8 +79,35 @@
 
             </div>
         </section>
+            
+            <!-- Card de Preço Atual -->
+            <div class="cards-resumo" style="margin-bottom: 30px;">
+                <div class="card" style="width: 300px;">
+                    <h3>Preço de Fechamento (Atual)</h3>
+                    <p class="valor" id="valor-ativo">Carregando...</p>
+                </div>
+            </div>
+
+            <!-- Gráfico Histórico -->
+            <div class="grafico-container">
+                <div class="cabecalho-grafico" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h2 style="margin-bottom: 0;">Histórico de Preços</h2>
+                    
+                    <!-- Botões de Filtro -->
+                    <div class="filtros-tempo" id="filtros-tempo">
+                        <button class="btn-filtro" data-periodo="1S">1S</button>
+                        <button class="btn-filtro" data-periodo="1M">1M</button>
+                        <button class="btn-filtro" data-periodo="1A">1A</button>
+                        <button class="btn-filtro" data-periodo="5A">5A</button>
+                        <button class="btn-filtro ativo" data-periodo="MAX">MÁX</button>
+                    </div>
+                </div>
+                <canvas id="graficoAtivo"></canvas>
+            </div>
+        </section>
     </main>
 
+    <!-- IMPORTAÇÃO DO CHART.JS (A "caneta" que faltava!) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
