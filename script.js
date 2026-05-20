@@ -168,15 +168,27 @@ document.addEventListener("DOMContentLoaded", function() {
         const tituloAtivo = document.getElementById("titulo-empresa");
         const cardValor = document.getElementById("valor-ativo");
         
+        // Captura o elemento da imagem da logo
+        const logoEmpresa = document.getElementById("logo-empresa");
+        
         painel.style.display = "block"; 
         tituloAtivo.innerText = ticker;
         cardValor.innerText = "Carregando...";
+
+        // --- A MÁGICA DA LOGO EXTERNA AQUI ---
+        // Junta o link base com o nome do ticker e a extensão .png
+        logoEmpresa.src = `https://raw.githubusercontent.com/thefintz/icones-b3/main/icones/${ticker}.png`;
+        logoEmpresa.style.display = "block"; // Mostra a imagem
+
+        // Prevenção de erro: Se a logo não existir lá no repositório thefintz, esconde o ícone quebrado
+        logoEmpresa.onerror = function() {
+            this.style.display = "none";
+        };
 
         // Reseta os botões para o padrão MÁX
         document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
         const btnMax = document.querySelector('.btn-filtro[data-periodo="MAX"]');
         if (btnMax) btnMax.classList.add('ativo');
-
         fetch(`base_de_dados/ativos/${ticker}.json?v=` + new Date().getTime())
             .then(res => res.json())
             .then(dados => {
