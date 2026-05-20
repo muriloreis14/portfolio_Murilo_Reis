@@ -127,7 +127,8 @@ body {
 .grafico-container h2 {
     color: #d3d3d3;
     margin-bottom: 20px;
-
+}
+    
 /* --- BARRA DE BUSCA DE ATIVOS --- */
 .busca-container {
     display: flex;
