@@ -37,15 +37,15 @@ jobs:
     - name: Executar o robô de notícias
       run: python atualiza_noticias.py
 
-    # 5. Salva os novos arquivos JSON gerados e envia para o repositório
+   # 5. Salva os novos arquivos JSON gerados e envia para o repositório
     - name: Commit e Push dos resultados
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         
-        # Adiciona apenas os arquivos de notícias modificados
-        git add base_de_dados/noticias/*.json
+        # Adiciona todas as modificações de forma segura (não trava se estiver vazio)
+        git add .
         
-        # O '|| true' no final evita que o GitHub acuse erro se o robô rodar e não houver nenhuma notícia nova para atualizar
+        # O '|| true' no final evita que o GitHub acuse erro se o robô rodar e não houver nenhuma notícia nova
         git commit -m "Atualizando base de notícias via GitHub Actions" || true
         git push
