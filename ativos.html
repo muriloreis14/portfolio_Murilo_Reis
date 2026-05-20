@@ -43,4 +43,42 @@
             <div class="layout-duas-colunas">
                 
                 <div class="coluna-esquerda">
-                    <div class="cards-resumo" style="margin-bottom:
+                    <div class="cards-resumo" style="margin-bottom: 30px;">
+                        <div class="card" style="width: 300px;">
+                            <h3>Preço de Fechamento (Atual)</h3>
+                            <p class="valor" id="valor-ativo">Carregando...</p>
+                        </div>
+                    </div>
+
+                    <div class="grafico-container" style="margin-top: 0;">
+                        <div class="cabecalho-grafico" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h2 style="margin-bottom: 0;">Histórico de Preços</h2>
+                            <div class="filtros-tempo" id="filtros-tempo">
+                                <button class="btn-filtro" data-periodo="1S">1S</button>
+                                <button class="btn-filtro" data-periodo="1M">1M</button>
+                                <button class="btn-filtro" data-periodo="1A">1A</button>
+                                <button class="btn-filtro" data-periodo="5A">5A</button>
+                                <button class="btn-filtro ativo" data-periodo="MAX">MÁX</button>
+                            </div>
+                        </div>
+                        <canvas id="graficoAtivo"></canvas>
+                    </div>
+                </div>
+
+                <div class="coluna-direita">
+                    <div class="painel-noticias">
+                        <h3>Últimas Notícias</h3>
+                        <ul id="lista-noticias" class="lista-noticias">
+                            <li>Aguardando dados...</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
