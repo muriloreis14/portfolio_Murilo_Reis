@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Econômico | Visão Geral</title>
+    <title>Uma Nova Economia | Visão Geral</title>
     <!-- Conecta o HTML ao visual (CSS) -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,8 +15,8 @@
         <ul class="abas">
             <li><a href="index.html" class="ativo">Home</a></li>
             <li><a href="ativos.html">Análise de Ativos</a></li>
-            <li><a href="preditivos.html">Modelos Preditivos</a></li>
-            <li><a href="metodologia.html">Metodologia</a></li>
+            <li><a href="preditivos.html">Análise do PIB</a></li>
+            <li><a href="metodologia.html">Análise do Bem-estar</a></li>
         </ul>
     </nav>
 
@@ -26,15 +26,15 @@
         <header class="cabecalho-principal">
             <img src="imagens/logo.jpg" alt="Logo Uma Nova Economia" class="imagem-logo">
             <div class="textos-header">
-                <h1>Visão Geral do Mercado</h1>
-                <p>Acompanhamento de indicadores econômicos e bolsa de valores atualizados de hora em hora.</p>
+                <h1>Visão Geral da Economia</h1>
+                <p>Acompanhamento de indicadores econômicos atualizados de hora em hora.</p>
             </div>
         </header>
 
         <!-- Resumos numéricos: 2 linhas com 4 cards -->
         <section class="cards-resumo">
             <div class="card">
-                <h3>IBOVESPA</h3>
+                <h3>Ibovespa</h3>
                 <p class="valor" id="valor-ibov">Carregando...</p>
             </div>
             <div class="card">
@@ -42,7 +42,7 @@
                 <p class="valor" id="valor-selic">Carregando...</p>
             </div>
             <div class="card">
-                <h3>Inflação (12m)</h3>
+                <h3>Inflação Acum.(12m)</h3>
                 <p class="valor" id="valor-ipca">Carregando...</p>
             </div>
             <div class="card">
@@ -74,7 +74,7 @@
                 <h2>Análise Histórica</h2>
                 <select id="seletor-indicador" class="caixa-selecao">
                     <!-- O valor (value) aponta exatamente para os arquivos que o seu robô criou -->
-                    <option value="base_de_dados/series_ibov.json">IBOVESPA</option>
+                    <option value="base_de_dados/series_ibov.json">Ibovespa</option>
                     <option value="base_de_dados/series_selic.json">Taxa Selic</option>
                     <option value="base_de_dados/series_ipca.json">Inflação (IPCA)</option>
                     <option value="base_de_dados/series_cambio.json">Taxa de Câmbio</option>
