@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Ecopetrol Launches $492 Million Tender Offer for Brava Energia Stake",
+        "link": "https://finance.yahoo.com/sectors/energy/articles/ecopetrol-launches-492-million-tender-150000795.html",
+        "fonte": "Oilprice.com",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Ecopetrol S.A. (EC) Announces a Share Purchase Agreement to Acquire Equity Stake in Brava Energia S.A",
         "link": "https://finance.yahoo.com/markets/stocks/articles/ecopetrol-ec-announces-share-purchase-054852303.html",
         "fonte": "Insider Monkey",
@@ -51,12 +57,6 @@
         "titulo": "McDermott Wins Contract for BRAVA Energia's Projects Offshore Brazil",
         "link": "https://finance.yahoo.com/news/mcdermott-wins-contract-brava-energias-160001077.html",
         "fonte": "Rigzone.com",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "McDermott wins offshore installation contract in Brazil",
-        "link": "https://www.offshore-technology.com/news/mcdermott-offshore-contract-brazil/",
-        "fonte": "Offshore Technology",
         "data": "Data desconhecida"
     }
 ]
