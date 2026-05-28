@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Brazil's government, federal district agree on BRB loan deal",
+        "link": "https://finance.yahoo.com/economy/policy/articles/brazils-government-federal-district-agree-184259136.html",
+        "fonte": "Reuters",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Brazilian payments network Elo selects banks for potential US IPO- report",
         "link": "https://www.electronicpaymentsinternational.com/news/elo-selects-banks-potential-us-ipo/",
         "fonte": "Electronic Payments",
@@ -51,12 +57,6 @@
         "titulo": "Banco Bradesco: Q4 Earnings Snapshot",
         "link": "https://finance.yahoo.com/news/banco-bradesco-q4-earnings-snapshot-072202030.html",
         "fonte": "Associated Press Finance",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Stock Market Today, Jan. 27: Banco Bradesco Rises Ahead of Brazilian Central Bank Meeting",
-        "link": "https://www.fool.com/coverage/stock-market-today/2026/01/28/stock-market-today-jan-27-banco-bradesco-rises-ahead-of-brazilian-central-bank-meeting/",
-        "fonte": "Motley Fool",
         "data": "Data desconhecida"
     }
 ]
