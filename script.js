@@ -160,149 +160,210 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Variáveis globais para o painel de ativos
     let graficoAtivoAtual = null;
-    let dadosCompletosAtivo = null; // Vai guardar a história toda para o filtro
+    let dadosCompletosAtivo = null; 
+    let dadosCompletosIbov = null; // Guarda o histórico do IBOVESPA diário
+    let tickerAtivoAtual = "";    // Guarda o ticker que está na tela
 
-    // Função que desenha o gráfico inicial
+    // Função que carrega e renderiza os dados comparativos
     function carregarDadosAtivo(ticker) {
+        tickerAtivoAtual = ticker;
         const painel = document.getElementById("painel-empresa");
         const tituloAtivo = document.getElementById("titulo-empresa");
         const cardValor = document.getElementById("valor-ativo");
-        // --- NOVO: BUSCADOR DE NOTÍCIAS ---
+        const logoEmpresa = document.getElementById("logo-empresa");
         const listaNoticias = document.getElementById("lista-noticias");
+        
         listaNoticias.innerHTML = "<li>Carregando notícias...</li>";
+        painel.style.display = "block"; 
+        tituloAtivo.innerText = ticker;
+        cardValor.innerText = "Carregando...";
 
-        // Tenta buscar o arquivo de notícias que seu robô Python vai gerar no futuro
+        // Carrega o logotipo da empresa
+        logoEmpresa.src = `https://raw.githubusercontent.com/thefintz/icones-b3/main/icones/${ticker}.png`;
+        logoEmpresa.style.display = "block";
+        logoEmpresa.onerror = function() { this.style.display = "none"; };
+
+        // --- BUSCADOR DE NOTÍCIAS ---
         fetch(`base_de_dados/noticias/${ticker}.json?v=` + new Date().getTime())
             .then(res => res.json())
             .then(noticias => {
-                listaNoticias.innerHTML = ""; // Limpa a mensagem de "carregando"
-                
+                listaNoticias.innerHTML = "";
                 if (noticias.length === 0) {
                     listaNoticias.innerHTML = "<li>Nenhuma notícia recente encontrada.</li>";
                     return;
                 }
-
-                // Pega no máximo as 10 primeiras notícias (caso o arquivo tenha mais)
-                const limiteNoticias = noticias.slice(0, 12);
-
-                limiteNoticias.forEach(noticia => {
+                noticias.slice(0, 12).forEach(noticia => {
                     const li = document.createElement("li");
                     li.innerHTML = `
-                        <span class="data-fonte">
-                            ${noticia.data} • <span class="destaque-fonte">${noticia.fonte}</span>
-                        </span>
+                        <span class="data-fonte">${noticia.data} • <span class="destaque-fonte">${noticia.fonte}</span></span>
                         <a href="${noticia.link}" target="_blank" class="link-noticia">${noticia.titulo}</a>
                     `;
                     listaNoticias.appendChild(li);
                 });
             })
             .catch(() => {
-                // Se o arquivo ainda não existir, exibe essa mensagem sutil
                 listaNoticias.innerHTML = "<li>O robô de notícias ainda não coletou dados para este ativo.</li>";
             });
-        
-        // Captura o elemento da imagem da logo
-        const logoEmpresa = document.getElementById("logo-empresa");
-        
-        painel.style.display = "block"; 
-        tituloAtivo.innerText = ticker;
-        cardValor.innerText = "Carregando...";
 
-        // --- A MÁGICA DA LOGO EXTERNA AQUI ---
-        // Junta o link base com o nome do ticker e a extensão .png
-        logoEmpresa.src = `https://raw.githubusercontent.com/thefintz/icones-b3/main/icones/${ticker}.png`;
-        logoEmpresa.style.display = "block"; // Mostra a imagem
-
-        // Prevenção de erro: Se a logo não existir lá no repositório thefintz, esconde o ícone quebrado
-        logoEmpresa.onerror = function() {
-            this.style.display = "none";
-        };
-
-        // Reseta os botões para o padrão MÁX
+        // Resetar os botões de filtro para o padrão MÁX
         document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
         const btnMax = document.querySelector('.btn-filtro[data-periodo="MAX"]');
         if (btnMax) btnMax.classList.add('ativo');
-        fetch(`base_de_dados/ativos/${ticker}.json?v=` + new Date().getTime())
-            .then(res => res.json())
-            .then(dados => {
-                // Salva os dados na variável global para podermos filtrar depois
-                dadosCompletosAtivo = dados;
 
-                let ultimoPreco = dados.valores[dados.valores.length - 1];
-                cardValor.innerText = "R$ " + ultimoPreco.toFixed(2).replace('.', ',');
-                cardValor.style.color = "#d3d3d3";
-                
-                const ctx = document.getElementById('graficoAtivo').getContext('2d');
-                if (graficoAtivoAtual !== null) {
-                    graficoAtivoAtual.destroy();
-                }
+        // --- CARREGAMENTO EM PARALELO: AÇÃO + IBOVESPA ---
+        Promise.all([
+            fetch(`base_de_dados/ativos/${ticker}.json?v=` + new Date().getTime()).then(res => res.json()),
+            fetch(`base_de_dados/ativos/IBOV_diario.json?v=` + new Date().getTime()).then(res => res.json())
+        ])
+        .then(([dadosAcao, dadosIbov]) => {
+            dadosCompletosAtivo = dadosAcao;
+            dadosCompletosIbov = dadosIbov;
 
-                graficoAtivoAtual = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: dados.periodos,
-                        datasets: [{
-                            label: `Fechamento - ${ticker}`, 
-                            data: dados.valores,
-                            borderColor: '#d3d3d3',
-                            backgroundColor: 'rgba(211, 211, 211, 0.1)',
-                            borderWidth: 2,
-                            tension: 0.1,
-                            pointRadius: 0,
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: { legend: { labels: { color: '#d3d3d3' } } },
-                        scales: {
-                            x: { ticks: { color: '#a0a0a0' }, grid: { color: '#333' } },
-                            y: { ticks: { color: '#a0a0a0' }, grid: { color: '#333' } }
-                        }
-                    }
-                });
-            })
-            .catch(erro => {
-                console.log("Erro:", erro);
-                cardValor.innerText = "Erro nos dados";
-            });
+            // Mostra o preço bruto atual no card em R$
+            let ultimoPreco = dadosAcao.valores[dadosAcao.valores.length - 1];
+            cardValor.innerText = "R$ " + ultimoPreco.toFixed(2).replace('.', ',');
+            
+            // Plota o gráfico inicial no modo MÁX
+            atualizarGraficoComparativo('MAX');
+        })
+        .catch(erro => {
+            console.error("Erro ao carregar dados do ativo/Ibov:", erro);
+            cardValor.innerText = "Erro nos dados";
+        });
     }
 
-    // --- NOVA LÓGICA: FILTRO DE TEMPO DO GRÁFICO ---
+    // Função interna que filtra as datas e calcula o retorno percentual acumulado
+    function atualizarGraficoComparativo(periodo) {
+        if (!dadosCompletosAtivo || !dadosCompletosIbov) return;
+
+        const totalDiasAcao = dadosCompletosAtivo.periodos.length;
+        let diasParaMostrar = totalDiasAcao;
+
+        if (periodo === '1S') diasParaMostrar = 5;
+        else if (periodo === '1M') diasParaMostrar = 21;
+        else if (periodo === '1A') diasParaMostrar = 252;
+        else if (periodo === '5A') diasParaMostrar = 1260;
+
+        if (diasParaMostrar > totalDiasAcao) diasParaMostrar = totalDiasAcao;
+
+        // Recorta as datas e valores originais da ação para a janela escolhida
+        const periodosFiltrados = dadosCompletosAtivo.periodos.slice(-diasParaMostrar);
+        const valoresAcaoBrutos = dadosCompletosAtivo.valores.slice(-diasParaMostrar);
+
+        // Preços de referência iniciais para o cálculo do percentual
+        const precoInicialAcao = valoresAcaoBrutos[0];
+
+        // Mapeia os valores da Ação para Rentabilidade Acumulada (%)
+        const valoresAcaoPercentual = valoresAcaoBrutos.map(v => ((v / precoInicialAcao) - 1) * 100);
+
+        // Alinha os pontos do IBOVESPA com as mesmas datas da ação para evitar furos no gráfico
+        const valoresIbovPercentual = [];
+        let primeiroValorIbovValido = null;
+
+        // Cria um dicionário rápido { data: valor } para o Ibovespa rodar em O(n)
+        const mapaIbov = {};
+        for (let i = 0; i < dadosCompletosIbov.periodos.length; i++) {
+            mapaIbov[dadosCompletosIbov.periodos[i]] = dadosCompletosIbov.valores[i];
+        }
+
+        // Primeiro, descobre qual é o valor base do Ibov na data de início do gráfico
+        for (let j = 0; j < periodosFiltrados.length; j++) {
+            const dataAtual = periodosFiltrados[j];
+            if (mapaIbov[dataAtual] !== undefined) {
+                primeiroValorIbovValido = mapaIbov[dataAtual];
+                break;
+            }
+        }
+
+        // Constrói a série histórica percentual do Ibov casando com os dias da ação
+        let ultimoValorIbovConhecido = primeiroValorIbovValido || 100000; // fallback de segurança
+        for (let j = 0; j < periodosFiltrados.length; j++) {
+            const dataAtual = periodosFiltrados[j];
+            if (mapaIbov[dataAtual] !== undefined) {
+                ultimoValorIbovConhecido = mapaIbov[dataAtual];
+            }
+            
+            if (primeiroValorIbovValido) {
+                let rentabilidadeIbov = ((ultimoValorIbovConhecido / primeiroValorIbovValido) - 1) * 100;
+                valoresIbovPercentual.push(rentabilidadeIbov);
+            } else {
+                valoresIbovPercentual.push(0);
+            }
+        }
+
+        // Renderização ou atualização do Chart.js
+        const ctx = document.getElementById('graficoAtivo').getContext('2d');
+        if (graficoAtivoAtual !== null) {
+            graficoAtivoAtual.destroy();
+        }
+
+        graficoAtivoAtual = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: periodosFiltrados,
+                datasets: [
+                    {
+                        label: `${tickerAtivoAtual} (%)`,
+                        data: valoresAcaoPercentual,
+                        borderColor: '#ffffff',
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        borderWidth: 2.5,
+                        pointRadius: 0,
+                        tension: 0.1,
+                        fill: true
+                    },
+                    {
+                        label: 'IBOVESPA (%)',
+                        data: valoresIbovPercentual,
+                        borderColor: '#4CAF50', // Verde para destacar o benchmark
+                        backgroundColor: 'transparent',
+                        borderWidth: 1.5,
+                        pointRadius: 0,
+                        tension: 0.1,
+                        borderDash: [4, 4] // Linha tracejada elegante
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: { 
+                    legend: { labels: { color: '#d3d3d3' } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.dataset.label}: ${context.raw.toFixed(2)}%`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { ticks: { color: '#a0a0a0' }, grid: { color: '#2a2a2a' } },
+                    y: { 
+                        ticks: { 
+                            color: '#a0a0a0',
+                            callback: function(value) { return value.toFixed(0) + '%'; }
+                        }, 
+                        grid: { color: '#2a2a2a' } 
+                    }
+                }
+            }
+        });
+    }
+
+    // Escuta os cliques nos botões de filtro de tempo (1S, 1M, 1A, etc)
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('btn-filtro')) {
-            // Se o gráfico ainda não carregou, ignora
             if (!dadosCompletosAtivo || !graficoAtivoAtual) return;
 
-            // Muda a cor do botão clicado
             document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
             e.target.classList.add('ativo');
 
             const periodo = e.target.getAttribute('data-periodo');
-            const totalDias = dadosCompletosAtivo.periodos.length;
-            let diasParaMostrar = totalDias;
-
-            // Matemática de mercado: corta pela quantidade de pregões úteis
-            if (periodo === '1S') diasParaMostrar = 5;
-            else if (periodo === '1M') diasParaMostrar = 21;
-            else if (periodo === '1A') diasParaMostrar = 252;
-            else if (periodo === '5A') diasParaMostrar = 1260;
-
-            // Evita erro se a empresa for muito nova e não tiver 5 anos de bolsa
-            if (diasParaMostrar > totalDias) diasParaMostrar = totalDias;
-
-            // Corta as listas pegando apenas o final (dias mais recentes)
-            const periodosFiltrados = dadosCompletosAtivo.periodos.slice(-diasParaMostrar);
-            const valoresFiltrados = dadosCompletosAtivo.valores.slice(-diasParaMostrar);
-
-            // Atualiza o gráfico na tela suavemente
-            graficoAtivoAtual.data.labels = periodosFiltrados;
-            graficoAtivoAtual.data.datasets[0].data = valoresFiltrados;
-            graficoAtivoAtual.update();
+            atualizarGraficoComparativo(periodo);
         }
     });
 
-    // Lógica que escuta a digitação na barra
+    // Mantém o monitoramento da barra de busca por digitação (Inalterado)
     if (inputBusca && listaSugestoes) {
         let ativosB3 = [];
 
@@ -313,7 +374,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         inputBusca.addEventListener("input", function() {
             const textoDigitado = inputBusca.value.toUpperCase(); 
-            
             if (textoDigitado === "") {
                 listaSugestoes.innerHTML = "";
                 listaSugestoes.classList.add("escondido");
@@ -327,16 +387,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 resultados.forEach(ativo => {
                     const li = document.createElement("li");
                     li.innerText = ativo;
-                    
                     li.addEventListener("click", function() {
                         inputBusca.value = ativo; 
                         listaSugestoes.innerHTML = ""; 
                         listaSugestoes.classList.add("escondido");
-                        
-                        // Chama a função organizada lá em cima
                         carregarDadosAtivo(ativo);
                     });
-                    
                     listaSugestoes.appendChild(li);
                 });
                 listaSugestoes.classList.remove("escondido");
@@ -349,6 +405,8 @@ document.addEventListener("DOMContentLoaded", function() {
             if (evento.target !== inputBusca) {
                 listaSugestoes.classList.add("escondido");
             }
+        });
+    }
         });
     }
 
