@@ -331,4 +331,81 @@ document.addEventListener("DOMContentLoaded", function() {
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return `${context.dataset.label}: ${context.
+                                return `${context.dataset.label}: ${context.raw.toFixed(2)}%`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { ticks: { color: '#a0a0a0' }, grid: { color: '#2a2a2a' } },
+                    y: { 
+                        ticks: { 
+                            color: '#a0a0a0',
+                            callback: function(value) { return value.toFixed(0) + '%'; }
+                        }, 
+                        grid: { color: '#2a2a2a' } 
+                    }
+                }
+            }
+        });
+    }
+
+    // Escuta os cliques nos botões de filtro de tempo (1S, 1M, 1A, etc)
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('btn-filtro')) {
+            if (!dadosCompletosAtivo || !graficoAtivoAtual) return;
+
+            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('ativo'));
+            e.target.classList.add('ativo');
+
+            const periodo = e.target.getAttribute('data-periodo');
+            atualizarGraficoComparativo(periodo);
+        }
+    });
+
+    // Mantém o monitoramento da barra de busca por digitação
+    if (inputBusca && listaSugestoes) {
+        let ativosB3 = [];
+
+        fetch('base_de_dados/lista_ativos.json?v=' + new Date().getTime())
+            .then(res => res.json())
+            .then(dados => ativosB3 = dados.tickers)
+            .catch(erro => console.log("Erro ao carregar a lista de ativos:", erro));
+
+        inputBusca.addEventListener("input", function() {
+            const textoDigitado = inputBusca.value.toUpperCase(); 
+            if (textoDigitado === "") {
+                listaSugestoes.innerHTML = "";
+                listaSugestoes.classList.add("escondido");
+                return;
+            }
+
+            const resultados = ativosB3.filter(ativo => ativo.startsWith(textoDigitado));
+            listaSugestoes.innerHTML = "";
+            
+            if (resultados.length > 0) {
+                resultados.forEach(ativo => {
+                    const li = document.createElement("li");
+                    li.innerText = ativo;
+                    li.addEventListener("click", function() {
+                        inputBusca.value = ativo; 
+                        listaSugestoes.innerHTML = ""; 
+                        listaSugestoes.classList.add("escondido");
+                        carregarDadosAtivo(ativo);
+                    });
+                    listaSugestoes.appendChild(li);
+                });
+                listaSugestoes.classList.remove("escondido");
+            } else {
+                listaSugestoes.classList.add("escondido");
+            }
+        });
+
+        document.addEventListener("click", function(evento) {
+            if (evento.target !== inputBusca) {
+                listaSugestoes.classList.add("escondido");
+            }
+        });
+    }
+
+});
