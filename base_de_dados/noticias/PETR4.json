@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Petrobras to Build $1.2B BioQAV and Renewable Diesel Facility",
+        "link": "https://finance.yahoo.com/energy/articles/petrobras-build-1-2b-bioqav-133900972.html",
+        "fonte": "Zacks",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Petrobras to proceed with $1.2bn biofuels facility at Cubatão refinery",
         "link": "https://www.energymonitor.ai/news/petrobras-proceed-biofuels-facility-cubatao/",
         "fonte": "Energy Monitor",
@@ -51,12 +57,6 @@
         "titulo": "Petrobras to Acquire 50% Interest in Exploration Block Offshore Brazil",
         "link": "https://finance.yahoo.com/sectors/energy/articles/petrobras-acquire-50-interest-exploration-153600548.html",
         "fonte": "Zacks",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Petrobras Buys 50% Stake in Campos Basin Exploration Block",
-        "link": "https://finance.yahoo.com/sectors/energy/articles/petrobras-buys-50-stake-campos-030321004.html",
-        "fonte": "Oilprice.com",
         "data": "Data desconhecida"
     }
 ]
