@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academia - Uma Nova Economia</title>
     
-    <!-- O Caminho de Volta: subindo um nível para achar o CSS na pasta principal -->
+    <!-- O Caminho de Volta para o CSS -->
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -14,11 +14,9 @@
     <nav class="menu-superior">
         <div class="logo">Uma Nova Economia</div>
         <ul class="abas">
-            <!-- Como estamos dentro de /Academia, precisamos voltar (../) para acessar as outras -->
             <li><a href="../index.html">Home</a></li>
             <li><a href="../ativos.html">Análise de Ativos</a></li>
             <li><a href="../PIB.html">Análise do PIB</a></li>
-            <!-- O link da Academia aponta para o próprio arquivo ou usa # -->
             <li><a href="academia.html" class="ativo">Academia</a></li>
         </ul>
     </nav>
@@ -28,36 +26,37 @@
         <header class="cabecalho-principal">
             <div class="textos-header">
                 <h1>Academia</h1>
-                <p>Selecione uma área de estudo para acessar o conteúdo didático e referências bibliográficas.</p>
+                <p>Passe o mouse sobre as áreas de conhecimento para saber mais.</p>
             </div>
         </header>
 
         <div class="acervo-academia">
-            <!-- Categoria: HPE -->
-            <div class="card-categoria">
-                <h2 class="titulo-area">História do Pensamento Econômico (HPE)</h2>
-                <ul class="lista-didatica">
-                    <li><a href="hpe/adam-smith.html">Adam Smith</a></li>
-                    <li><a href="hpe/david-ricardo.html">David Ricardo</a></li>
-                    <li><a href="hpe/karl-marx.html">Karl Marx</a></li>
-                    <li><a href="hpe/keynes.html">John Maynard Keynes</a></li>
-                    <li><a href="hpe/friedman.html">Milton Friedman</a></li>
-                </ul>
+            <!-- Áreas de Conhecimento com os balões (tooltips) -->
+            
+            <div class="card-area" data-tooltip="Estuda a evolução das ideias e teorias econômicas ao longo do tempo.">
+                História do Pensamento Econômico (HPE)
             </div>
 
-            <!-- Categoria: Economia Brasileira -->
-            <div class="card-categoria">
-                <h2 class="titulo-area">Economia Brasileira</h2>
-                <ul class="lista-didatica">
-                    <li><a href="eco-br/industrializacao.html">Processo de Industrialização</a></li>
-                    <li><a href="eco-br/ciclos-economicos.html">Ciclos Econômicos</a></li>
-                    <li><a href="eco-br/pib-2010-2025.html">Análise 2010-2025</a></li>
-                </ul>
+            <div class="card-area" data-tooltip="Analisa a formação, os ciclos e os desafios estruturais da economia do Brasil.">
+                Economia Brasileira
             </div>
+
+            <div class="card-area" data-tooltip="Esta é a área que estuda as relações da moeda na Economia.">
+                Economia Monetária
+            </div>
+
+            <div class="card-area" data-tooltip="Estuda o comportamento de indivíduos e empresas na tomada de decisões.">
+                Microeconomia
+            </div>
+
+            <div class="card-area" data-tooltip="Estuda a interação entre a política, a lei e a economia.">
+                Economia Política
+            </div>
+
         </div>
     </main>
 
-    <!-- O Caminho de Volta: subindo um nível para achar o JS na pasta principal -->
+    <!-- O Caminho de Volta para o JS -->
     <script src="../script.js"></script>
 </body>
 </html>
