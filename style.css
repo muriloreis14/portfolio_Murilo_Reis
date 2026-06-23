@@ -370,3 +370,56 @@ body {
     opacity: 1;
     visibility: visible;
 }
+/* =========================================
+   PADRÃO: PÁGINAS DIDÁTICAS (ACADEMIA)
+   ========================================= */
+
+.artigo-didatico {
+    max-width: 900px;
+    margin: 40px auto; /* Centraliza a página e dá espaço superior/inferior */
+    padding: 20px;
+    background-color: #1e1e1e; /* Fundo escuro padrão do seu site */
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+/* Título: Maior, negrito e sublinhado */
+.artigo-didatico .titulo-texto {
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+/* Subtítulo/Resumo: Menor que o título, negrito, sem sublinhado */
+.artigo-didatico .resumo-texto {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 30px;
+    color: #cccccc; /* Um tom levemente mais claro/cinza para destacar do corpo */
+}
+
+/* Imagem Ilustrativa: Flutuando à direita */
+.artigo-didatico .imagem-ilustrativa {
+    float: right;
+    max-width: 400px; /* Largura máxima da imagem */
+    margin-left: 30px; /* Espaço entre o texto e a imagem */
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Corpo do texto: Mesmo tamanho do subtítulo, sem negrito/sublinhado */
+.artigo-didatico .corpo-texto {
+    font-size: 1.2rem;
+    font-weight: normal;
+    text-decoration: none;
+    line-height: 1.6; /* Espaçamento entre as linhas para leitura confortável */
+    text-align: justify;
+}
+
+.artigo-didatico .corpo-texto p {
+    margin-bottom: 15px;
+}
