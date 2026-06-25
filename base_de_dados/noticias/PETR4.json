@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Petrobras' Búzios Oil Field Sets New Output Record at 1.1 Million Bpd",
+        "link": "https://finance.yahoo.com/energy/articles/petrobras-b-zios-oil-field-071500099.html",
+        "fonte": "Oilprice.com",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Petrobras and Pemex Sign MOU to Boost Gulf of Mexico Output",
         "link": "https://finance.yahoo.com/energy/articles/petrobras-pemex-sign-mou-boost-122700628.html",
         "fonte": "Zacks",
@@ -51,12 +57,6 @@
         "titulo": "Barclays and BofA Reassess Transocean (RIG) Following Petrobras Contract Extensions and Backlog Growth",
         "link": "https://finance.yahoo.com/energy/articles/barclays-bofa-reassess-transocean-rig-080029021.html",
         "fonte": "Insider Monkey",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Petrobras Signs R$443.7M Decommissioning Contract With OceanPact",
-        "link": "https://finance.yahoo.com/energy/articles/petrobras-signs-r-443-7m-142300628.html",
-        "fonte": "Zacks",
         "data": "Data desconhecida"
     }
 ]
