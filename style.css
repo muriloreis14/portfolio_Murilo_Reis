@@ -423,3 +423,91 @@ body {
 .artigo-didatico .corpo-texto p {
     margin-bottom: 15px;
 }
+* =========================================
+   1. FICHA TÉCNICA (CAIXA RÁPIDA)
+   ========================================= */
+.ficha-tecnica {
+    float: right; /* Faz a caixa flutuar à direita do texto */
+    width: 280px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    overflow: hidden; /* Garante que o cabeçalho respeite as bordas arredondadas */
+}
+
+.ficha-titulo {
+    background-color: #333;
+    color: #ffffff;
+    text-align: center;
+    padding: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+}
+
+.ficha-conteudo {
+    padding: 15px;
+}
+
+.ficha-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #d3d3d3;
+    border-bottom: 1px solid #2a2a2a;
+    padding-bottom: 8px;
+}
+
+/* Remove a linha divisória do último item */
+.ficha-item:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.ficha-icone {
+    margin-right: 12px;
+    font-size: 1.2rem;
+}
+
+/* =========================================
+   2. BALÃO DE FRASE FAMOSA
+   ========================================= */
+.balao-frase {
+    background-color: #252525;
+    border-left: 5px solid #4caf50; /* Linha verde de destaque */
+    padding: 20px 25px 20px 45px;
+    margin: 30px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: #e0e0e0;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+/* A aspa gigante decorativa no fundo */
+.balao-frase::before {
+    content: "❝";
+    font-size: 4rem;
+    color: rgba(76, 175, 80, 0.15); /* Verde bem transparente */
+    position: absolute;
+    top: -5px;
+    left: 10px;
+    font-family: Georgia, serif;
+}
+
+.autor-frase {
+    display: block;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: bold;
+    color: #a0a0a0;
+    text-align: right; /* Joga o nome do autor para a direita */
+}
