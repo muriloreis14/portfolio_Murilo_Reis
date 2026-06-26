@@ -42,12 +42,6 @@
         "data": "Data desconhecida"
     },
     {
-        "titulo": "Cerebras initiated, Crocs upgraded: Wall Street's top analyst calls",
-        "link": "https://finance.yahoo.com/news/cvs-upgraded-general-mills-downgraded-135035702.html",
-        "fonte": "The Fly",
-        "data": "Data desconhecida"
-    },
-    {
         "titulo": "Embraer expects India to move ahead with military cargo jet tender in coming months",
         "link": "https://sg.finance.yahoo.com/news/embraer-expects-india-move-ahead-202113604.html",
         "fonte": "Reuters",
@@ -57,6 +51,12 @@
         "titulo": "Is Eve Holding (EVEX) One of the Most Promising Penny Stocks According to Wall Street Analysts?",
         "link": "https://finance.yahoo.com/markets/stocks/articles/eve-holding-evex-one-most-215653367.html",
         "fonte": "Insider Monkey",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "Can Boeing's Commercial Aircraft Delivery Momentum Lift Performance?",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/boeings-commercial-aircraft-delivery-momentum-155500350.html",
+        "fonte": "Zacks",
         "data": "Data desconhecida"
     }
 ]
