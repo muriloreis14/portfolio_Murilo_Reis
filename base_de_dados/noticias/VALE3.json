@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Street Calls of the Week",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/street-calls-week-103502997.html",
+        "fonte": "Investing.com",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Here Are Wednesday’s Top Wall Street Analyst Research Calls: Archer-Daniels Midland, Best Buy, Burlington Stores, Dell Technologies, e.l.f. Beauty, Humana, Transdigm, Vale, and More",
         "link": "https://247wallst.com/investing/2026/08/05/here-are-wednesdays-top-wall-street-analyst-research-calls-archer-daniels-midland-best-buy-burlington-stores-dell-technologies-e-l-f-beauty-humana-transdigm-vale-and-more/",
         "fonte": "24/7 Wall St.",
@@ -51,12 +57,6 @@
         "titulo": "Vale (BOVESPA:VALE3) Stock Sees Modest Fair Value Cut As Analysts Weigh Commodity Risks",
         "link": "https://finance.yahoo.com/markets/stocks/articles/vale-bovespa-vale3-stock-sees-051041302.html",
         "fonte": "Simply Wall St.",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "VALE S.A. (VALE) Surpasses Market Returns: Some Facts Worth Knowing",
-        "link": "https://finance.yahoo.com/markets/stocks/articles/vale-vale-surpasses-market-returns-220005959.html",
-        "fonte": "Zacks",
         "data": "Data desconhecida"
     }
 ]
