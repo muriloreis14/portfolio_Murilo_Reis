@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Vale, ABB sign deal to expand automation at Brazil iron ore plants",
+        "link": "https://www.mining-technology.com/news/vale-abb-deal-automation-brazil-iron-ore/",
+        "fonte": "Mining Technology",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Street Calls of the Week",
         "link": "https://finance.yahoo.com/markets/stocks/articles/street-calls-week-103502997.html",
         "fonte": "Investing.com",
@@ -51,12 +57,6 @@
         "titulo": "VALE S.A. (VALE) is Attracting Investor Attention: Here is What You Should Know",
         "link": "https://finance.yahoo.com/markets/stocks/articles/vale-vale-attracting-investor-attention-130002576.html",
         "fonte": "Zacks",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Vale (BOVESPA:VALE3) Stock Sees Modest Fair Value Cut As Analysts Weigh Commodity Risks",
-        "link": "https://finance.yahoo.com/markets/stocks/articles/vale-bovespa-vale3-stock-sees-051041302.html",
-        "fonte": "Simply Wall St.",
         "data": "Data desconhecida"
     }
 ]
