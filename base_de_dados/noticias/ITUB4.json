@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Brazil's big banks shun riskier lending as household debt strains grow",
+        "link": "https://finance.yahoo.com/economy/policy/articles/brazils-big-banks-shun-riskier-165834471.html",
+        "fonte": "Reuters",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Nu Holdings Jumps 10% to a Five-Month High, StoneCo Drops 6% as Nubank Breaks From the Pack",
         "link": "https://247wallst.com/investing/2026/08/14/nu-holdings-jumps-10-to-a-five-month-high-stoneco-drops-6-as-nubank-breaks-from-the-pack/",
         "fonte": "24/7 Wall St.",
@@ -51,12 +57,6 @@
         "titulo": "Mexico inflation undershoots forecasts; core rate returns to target range",
         "link": "https://finance.yahoo.com/economy/policy/articles/mexico-inflation-undershoots-forecasts-core-144443866.html",
         "fonte": "Reuters",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "SWIFT's Blockchain Ledger Goes Live With HSBC, Citi and 15 Other Banks: Threat to XRP, XLM Cross-Border Plays?",
-        "link": "https://www.ccn.com/news/crypto/swift-blockchain-ledger-live-17-banks-xrp-xlm-demand-risk/",
-        "fonte": "CCN",
         "data": "Data desconhecida"
     }
 ]
