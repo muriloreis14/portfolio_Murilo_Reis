@@ -1,5 +1,17 @@
 [
     {
+        "titulo": "Sector Update: Energy Stocks Edge Higher Premarket Monday",
+        "link": "https://finance.yahoo.com/energy/articles/sector-energy-stocks-edge-higher-132741328.html",
+        "fonte": "MT Newswires",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "PBR Q2 Earnings Beat on Record Production and Higher Brent",
+        "link": "https://finance.yahoo.com/energy/articles/pbr-q2-earnings-beat-record-125200496.html",
+        "fonte": "Zacks",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Petrobras confirms hydrocarbon presence in deepwater well off Brazil",
         "link": "https://www.offshore-technology.com/news/petrobras-hydrocarbon-deep-water-well-amapa/",
         "fonte": "Offshore Technology",
@@ -44,18 +56,6 @@
     {
         "titulo": "Petrobras Q2 Profit Nearly Doubles as Oil Production Hits Record",
         "link": "https://finance.yahoo.com/energy/articles/petrobras-q2-profit-nearly-doubles-024500571.html",
-        "fonte": "Oilprice.com",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Petrobras Profit Tops Estimates on Iran War-Driven Oil Rally",
-        "link": "https://finance.yahoo.com/energy/articles/petrobras-profit-tops-estimates-iran-224447408.html",
-        "fonte": "Bloomberg",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "This Megaproject Could Keep Brazil's Oil Boom Running Deep Into The 2030's",
-        "link": "https://finance.yahoo.com/energy/articles/megaproject-could-keep-brazils-oil-170000579.html",
         "fonte": "Oilprice.com",
         "data": "Data desconhecida"
     }
