@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Sector Update: Energy Stocks Rise Pre-Bell Tuesday",
+        "link": "https://finance.yahoo.com/energy/articles/sector-energy-stocks-rise-pre-132606759.html",
+        "fonte": "MT Newswires",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Market Chatter: Petrobras Mulling Loosening Braskem's Contract Terms, Boosting Naptha Supplies Amid Debt Negotiations",
         "link": "https://finance.yahoo.com/markets/stocks/articles/market-chatter-petrobras-mulling-loosening-090816226.html",
         "fonte": "MT Newswires",
@@ -51,12 +57,6 @@
         "titulo": "Can Siemens Energy (XTRA:ENR) Turn AI And Brazil Contract Wins Into Growth?",
         "link": "https://finance.yahoo.com/energy/articles/siemens-energy-xtra-enr-turn-170918230.html",
         "fonte": "Simply Wall St.",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "SBM Offshore selects Siemens Energy for Brazil Sergipe-Alagoas FPSOs",
-        "link": "https://www.offshore-technology.com/news/siemens-energy-sergipe-alagoas-contract/",
-        "fonte": "Offshore Technology",
         "data": "Data desconhecida"
     }
 ]

@@ -1,5 +1,17 @@
 [
     {
+        "titulo": "Ecopetrol Completes $1.2 Billion Brazilian Oil Deal",
+        "link": "https://finance.yahoo.com/energy/articles/ecopetrol-completes-1-2-billion-163715015.html",
+        "fonte": "Oilprice.com",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "Sector Update: Energy Stocks Rise Pre-Bell Tuesday",
+        "link": "https://finance.yahoo.com/energy/articles/sector-energy-stocks-rise-pre-132606759.html",
+        "fonte": "MT Newswires",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Ecopetrol Q2 Earnings Call Highlights",
         "link": "https://www.marketbeat.com/instant-alerts/ecopetrol-q2-earnings-call-highlights-2026-08-05/?utm_source=yahoofinance&utm_medium=yahoofinance",
         "fonte": "MarketBeat",
@@ -44,18 +56,6 @@
     {
         "titulo": "Petro-Victory to transfer certain Potiguar Basin assets to ATE",
         "link": "https://www.offshore-technology.com/news/petro-victory-transfer-potiguar-basin-ate/",
-        "fonte": "Offshore Technology",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Petro-Victory Energy to Contribute Certain Brazilian Assets in Exchange for 10.25% Ownership Stake in Azevedo & Travassos Energia",
-        "link": "https://finance.yahoo.com/sectors/energy/articles/petro-victory-energy-contribute-certain-170828514.html",
-        "fonte": "MT Newswires",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Petrobras to buy Petronas’ 50% Campos Basin stakes for $450m",
-        "link": "https://www.offshore-technology.com/news/petrobras-to-buy-petronas-campos-basin-stakes/",
         "fonte": "Offshore Technology",
         "data": "Data desconhecida"
     }
