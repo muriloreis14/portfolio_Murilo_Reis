@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "The U.S. doesn’t have a state-owned oil giant. But in Venezuela, the federal government will control a company with the world’s 2nd largest reserves",
+        "link": "https://finance.yahoo.com/energy/articles/u-doesn-t-state-owned-173125070.html",
+        "fonte": "Fortune",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Moderna upgraded, Allstate downgraded: Wall Street's top analyst calls",
         "link": "https://finance.yahoo.com/markets/stocks/articles/moderna-upgraded-baidu-downgraded-wall-133822050.html",
         "fonte": "The Fly",
@@ -51,12 +57,6 @@
         "titulo": "Pemex and Petrobras Bet Big on High-Risk High-Reward Drilling Off Mexico",
         "link": "https://finance.yahoo.com/energy/articles/pemex-petrobras-bet-big-high-210000211.html",
         "fonte": "Oilprice.com",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Sector Update: Energy Stocks Mixed Friday Afternoon",
-        "link": "https://finance.yahoo.com/energy/articles/sector-energy-stocks-mixed-friday-173644811.html",
-        "fonte": "MT Newswires",
         "data": "Data desconhecida"
     }
 ]
