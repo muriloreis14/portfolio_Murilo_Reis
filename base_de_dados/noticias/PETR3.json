@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Oil Stocks Hit New Highs After U.S. Resumes Strikes in Strait of Hormuz",
+        "link": "https://www.barrons.com/articles/oil-stocks-jump-strikes-strait-of-hormuz-d440f751?siteid=yhoof2&yptr=yahoo",
+        "fonte": "Barrons.com",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Petrobras Eyes LNG Exports to Asia as Gas Demand Surges",
         "link": "https://finance.yahoo.com/energy/articles/petrobras-eyes-lng-exports-asia-151300605.html",
         "fonte": "Zacks",
@@ -51,12 +57,6 @@
         "titulo": "Halliburton Expands Presence in Brazil With New Petrobras CCS Deal",
         "link": "https://finance.yahoo.com/energy/articles/halliburton-expands-presence-brazil-petrobras-142400527.html",
         "fonte": "Zacks",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Petrobras begins talks for four offshore exploration blocks in Ghana",
-        "link": "https://www.offshore-technology.com/news/petrobras-talks-four-offshore-exploration-blocks-ghana/",
-        "fonte": "Offshore Technology",
         "data": "Data desconhecida"
     }
 ]
