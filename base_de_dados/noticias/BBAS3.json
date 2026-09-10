@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Banco do Brasil SA BB Brasil's Dividend Analysis",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/banco-brasil-sa-bb-brasils-110621159.html",
+        "fonte": "GuruFocus.com",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Brazilian Banks Expand Crypto Offerings as Regulation Takes Hold",
         "link": "https://decrypt.co/377621/brazilian-banks-expand-crypto-offerings",
         "fonte": "decrypt",
@@ -51,12 +57,6 @@
         "titulo": "Brazilian payments network Elo selects banks for potential US IPO- report",
         "link": "https://www.electronicpaymentsinternational.com/news/elo-selects-banks-potential-us-ipo/",
         "fonte": "Electronic Payments",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Is Prologis (PLD) Outperforming Other Finance Stocks This Year?",
-        "link": "https://finance.yahoo.com/markets/stocks/articles/prologis-pld-outperforming-other-finance-134003222.html",
-        "fonte": "Zacks",
         "data": "Data desconhecida"
     }
 ]
