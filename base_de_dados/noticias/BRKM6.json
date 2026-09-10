@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Sector Update: Energy",
+        "link": "https://finance.yahoo.com/energy/articles/sector-energy-193451548.html",
+        "fonte": "MT Newswires",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Sector Update: Energy Stocks Rise Pre-Bell Tuesday",
         "link": "https://finance.yahoo.com/energy/articles/sector-energy-stocks-rise-pre-132606759.html",
         "fonte": "MT Newswires",
@@ -50,12 +56,6 @@
     {
         "titulo": "Has Braskem (BAK) Outpaced Other Basic Materials Stocks This Year?",
         "link": "https://finance.yahoo.com/markets/stocks/articles/braskem-bak-outpaced-other-basic-134005271.html",
-        "fonte": "Zacks",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Zacks.com featured highlights include DaVita, Integra LifeSciences, Braskem and LyondellBasell",
-        "link": "https://finance.yahoo.com/markets/stocks/articles/zacks-com-featured-highlights-davita-074900158.html",
         "fonte": "Zacks",
         "data": "Data desconhecida"
     }
