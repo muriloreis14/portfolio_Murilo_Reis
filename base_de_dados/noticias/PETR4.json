@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Petrobras Receives $434 Million in New Diesel Subsidy Payments",
+        "link": "https://finance.yahoo.com/energy/articles/petrobras-receives-434-million-diesel-134000532.html",
+        "fonte": "Zacks",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Sempra Locks In Petrobras for 20-Year U.S. LNG Supply Deal",
         "link": "https://finance.yahoo.com/energy/articles/sempra-locks-petrobras-20-u-003328108.html",
         "fonte": "Oilprice.com",
@@ -51,12 +57,6 @@
         "titulo": "The U.S. doesn’t have a state-owned oil giant. But in Venezuela, the federal government will control a company with the world’s 2nd largest reserves",
         "link": "https://finance.yahoo.com/energy/articles/u-doesn-t-state-owned-173125070.html",
         "fonte": "Fortune",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Moderna upgraded, Allstate downgraded: Wall Street's top analyst calls",
-        "link": "https://finance.yahoo.com/markets/stocks/articles/moderna-upgraded-baidu-downgraded-wall-133822050.html",
-        "fonte": "The Fly",
         "data": "Data desconhecida"
     }
 ]
