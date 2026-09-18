@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Petrobras secures eight offshore PSCs in Côte d’Ivoire",
+        "link": "https://www.offshore-technology.com/news/petrobras-eight-offshore-pscs-cote-divoire/",
+        "fonte": "Offshore Technology",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Vallourec Pipes Up With Another Brazilian Win",
         "link": "https://app.moby.co/home/news/news-vallourec-pipes-up-with-another-brazilian-win?utm_source=yahoo_finance&utm_medium=rss",
         "fonte": "Moby",
@@ -51,12 +57,6 @@
         "titulo": "KNOT Offshore Partners Q2 Earnings Call Highlights",
         "link": "https://www.marketbeat.com/instant-alerts/transcript-knot-offshore-partners-q2-earnings-call-highlights-2026-09-04/?utm_source=yahoofinance&utm_medium=yahoofinance",
         "fonte": "MarketBeat",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Shell Partners With BP to Expand Deepwater Footprint in Brazil & GoA",
-        "link": "https://finance.yahoo.com/energy/articles/shell-partners-bp-expand-deepwater-131600397.html",
-        "fonte": "Zacks",
         "data": "Data desconhecida"
     }
 ]
