@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Luxury jet card company takes delivery of the fanciest new private jet",
+        "link": "https://www.thestreet.com/travel/flexjet-takes-delivery-new-private-jet-embraer-praetor-600e",
+        "fonte": "TheStreet",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Embraer eyes Middle East for more Millennium sales",
         "link": "https://www.axios.com/2026/09/16/embraer-middle-east-uae-c390#utm_source=yahoo_finance&utm_medium=partner&utm_campaign=subs-partner-yahoo-finance-AI",
         "fonte": "Axios",
@@ -51,12 +57,6 @@
         "titulo": "Avation Targets 14% Fleet Growth Through 2030 as Aircraft Supply Tightens",
         "link": "https://www.marketbeat.com/instant-alerts/avation-targets-14-fleet-growth-through-2030-as-aircraft-supply-tightens-2026-08-19/?utm_source=yahoofinance&utm_medium=yahoofinance",
         "fonte": "MarketBeat",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Is Embraer (EMBJ) a Solid Growth Stock? 3 Reasons to Think \"Yes\"",
-        "link": "https://finance.yahoo.com/markets/stocks/articles/embraer-embj-solid-growth-stock-164502359.html",
-        "fonte": "Zacks",
         "data": "Data desconhecida"
     }
 ]
