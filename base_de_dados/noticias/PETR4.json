@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "Sector Update: Energy Stocks Fall Monday Afternoon",
+        "link": "https://finance.yahoo.com/energy/articles/sector-energy-stocks-fall-monday-180054749.html",
+        "fonte": "MT Newswires",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Petrobras Expands Africa Footprint With 8 New Offshore Blocks",
         "link": "https://finance.yahoo.com/energy/articles/petrobras-expands-africa-footprint-8-145200395.html",
         "fonte": "Zacks",
@@ -51,12 +57,6 @@
         "titulo": "Petrobras Receives $434 Million in New Diesel Subsidy Payments",
         "link": "https://finance.yahoo.com/energy/articles/petrobras-receives-434-million-diesel-134000532.html",
         "fonte": "Zacks",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Sempra Locks In Petrobras for 20-Year U.S. LNG Supply Deal",
-        "link": "https://finance.yahoo.com/energy/articles/sempra-locks-petrobras-20-u-003328108.html",
-        "fonte": "Oilprice.com",
         "data": "Data desconhecida"
     }
 ]
