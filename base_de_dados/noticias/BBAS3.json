@@ -18,12 +18,6 @@
         "data": "Data desconhecida"
     },
     {
-        "titulo": "Brazil's big banks shun riskier lending as household debt strains grow",
-        "link": "https://finance.yahoo.com/economy/policy/articles/brazils-big-banks-shun-riskier-165834471.html",
-        "fonte": "Reuters",
-        "data": "Data desconhecida"
-    },
-    {
         "titulo": "New Strong Sell Stocks for July 29th",
         "link": "https://finance.yahoo.com/markets/stocks/articles/strong-sell-stocks-july-29th-092900194.html",
         "fonte": "Zacks",
@@ -56,6 +50,12 @@
     {
         "titulo": "Brazilian payments network Elo selects banks for potential US IPO- report",
         "link": "https://www.electronicpaymentsinternational.com/news/elo-selects-banks-potential-us-ipo/",
+        "fonte": "Electronic Payments",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "Brazilian payments network Elo selects banks for potential US IPO- report",
+        "link": "https://www.electronicpaymentsinternational.com/news/brazilian-payments-network-elo-selects-banks-for-potential-us-ipo-report/",
         "fonte": "Electronic Payments",
         "data": "Data desconhecida"
     }
