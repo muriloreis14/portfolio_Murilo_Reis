@@ -1,5 +1,11 @@
 [
     {
+        "titulo": "America’s Rare Earth Reckoning Is Less Than 60 Days Away",
+        "link": "https://finance.yahoo.com/energy/articles/america-rare-earth-reckoning-less-020000209.html",
+        "fonte": "Oilprice.com",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Here is What to Know Beyond Why VALE S.A. (VALE) is a Trending Stock",
         "link": "https://finance.yahoo.com/markets/stocks/articles/know-beyond-why-vale-vale-130002495.html",
         "fonte": "Zacks",
@@ -51,12 +57,6 @@
         "titulo": "Brazil Stocks Dive As President Lula Wins Re-Election",
         "link": "https://www.investors.com/news/brazil-stocks-dive-as-president-lula-wins-re-election/?src=A00220&yptr=yahoo",
         "fonte": "Investor's Business Daily",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Brazilian Stocks Tumble After Lula’s Shock Win. It Could Create a Buying Opportunity.",
-        "link": "https://www.barrons.com/articles/brazil-election-stocks-f730e840?siteid=yhoof2&yptr=yahoo",
-        "fonte": "Barrons.com",
         "data": "Data desconhecida"
     }
 ]
