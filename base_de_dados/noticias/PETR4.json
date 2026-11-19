@@ -1,5 +1,17 @@
 [
     {
+        "titulo": "Is This Still an \"AI\" Driven Market?",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/still-ai-driven-market-213300337.html",
+        "fonte": "Zacks",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "Mercosur’s Tax Break Is Fueling Brazil’s Oil Push Into Europe",
+        "link": "https://finance.yahoo.com/energy/articles/mercosur-tax-break-fueling-brazil-210000116.html",
+        "fonte": "Oilprice.com",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Petrobras Awards $410M Subsea Contract to Expand Brazil Operations",
         "link": "https://finance.yahoo.com/energy/articles/petrobras-awards-410m-subsea-contract-142100318.html",
         "fonte": "Zacks",
@@ -45,18 +57,6 @@
         "titulo": "What Questerre Energy (QEC) Said on Its Q3 Earnings Call",
         "link": "https://www.marketbeat.com/instant-alerts/transcript-what-questerre-energy-qec-said-on-its-q3-earnings-call-2026-11-13/?utm_source=yahoofinance&utm_medium=yahoofinance",
         "fonte": "MarketBeat",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Computer Modelling Group Q2 Earnings Call Highlights",
-        "link": "https://www.marketbeat.com/instant-alerts/transcript-computer-modelling-group-q2-earnings-call-highlights-2026-11-13/?utm_source=yahoofinance&utm_medium=yahoofinance",
-        "fonte": "MarketBeat",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Petrobras (PBR) Q3 2026 Earnings Call Transcript",
-        "link": "https://www.fool.com/earnings/call-transcripts/2026/11/13/petrobras-pbr-q3-2026-earnings-call-transcript/",
-        "fonte": "Motley Fool",
         "data": "Data desconhecida"
     }
 ]
