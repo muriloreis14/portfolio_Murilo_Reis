@@ -1,7 +1,19 @@
 [
     {
-        "titulo": "US proposes higher tariffs on Brazil imports, including 10% duty on aircraft",
+        "titulo": "US proposes surprise new tariffs on Brazil imports, including 10% duty on aircraft",
         "link": "https://finance.yahoo.com/news/us-proposes-higher-tariffs-brazil-131543830.html",
+        "fonte": "Reuters",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "US airlines face higher costs from proposed Embraer duty",
+        "link": "https://finance.yahoo.com/economy/policy/articles/us-airlines-face-higher-costs-222235730.html",
+        "fonte": "Reuters",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "Trump unveils new tariffs over excess industrial capacity, undeterred by midterms defeat",
+        "link": "https://finance.yahoo.com/economy/policy/articles/us-proposes-tariffs-14-trading-131826582.html",
         "fonte": "Reuters",
         "data": "Data desconhecida"
     },
@@ -45,18 +57,6 @@
         "titulo": "ACHR Underperforms Industry in the Past Year: How to Play the Stock?",
         "link": "https://finance.yahoo.com/markets/stocks/articles/achr-underperforms-industry-past-play-142200254.html",
         "fonte": "Zacks",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Embraer Mulls New Aircraft Lines as Core Jet Business Booms",
-        "link": "https://www.wsj.com/business/embraer-mulls-new-aircraft-lines-as-core-jet-business-booms-e64582f5?siteid=yhoof2&yptr=yahoo",
-        "fonte": "The Wall Street Journal",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Embraer In Buy Zone After Earnings. Here's How Boeing, Airbus Compare.",
-        "link": "https://www.investors.com/news/embraer-boeing-airbus-earnings-stocks-to-buy/?src=A00220&yptr=yahoo",
-        "fonte": "Investor's Business Daily",
         "data": "Data desconhecida"
     }
 ]
