@@ -30,18 +30,6 @@
         "data": "Data desconhecida"
     },
     {
-        "titulo": "Billionaire David Tepper Dumps AMD and Broadcom, Loads Up on Oracle and Nvidia",
-        "link": "https://finance.yahoo.com/markets/stocks/articles/billionaire-david-tepper-dumps-amd-111611867.html",
-        "fonte": "GuruFocus.com",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "David Tepper’s Appaloosa Goes Big on SpaceX, While Slashing Alphabet Stake",
-        "link": "https://www.barrons.com/articles/david-tepper-appaloosa-spacex-alphabet-holdings-0d829940?siteid=yhoof2&yptr=yahoo",
-        "fonte": "Barrons.com",
-        "data": "Data desconhecida"
-    },
-    {
         "titulo": "Bear of the Day: Whirlpool (WHR)",
         "link": "https://finance.yahoo.com/markets/stocks/articles/bear-day-whirlpool-whr-090000368.html",
         "fonte": "Zacks",
@@ -57,6 +45,18 @@
         "titulo": "Whirlpool delivers bad news to customers before Black Friday",
         "link": "https://www.thestreet.com/retail/whirlpool-delivers-bad-news-to-customers-before-black-friday",
         "fonte": "TheStreet",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "5 High-Yield Dividend Stocks That Could Be Headed for a Dividend Cut",
+        "link": "https://247wallst.com/investing/2026/11/05/5-high-yield-dividend-stocks-that-could-be-headed-for-a-dividend-cut/",
+        "fonte": "24/7 Wall St.",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "WHR Q3 deep dive: margin recovery actions and pricing moves shape outlook",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/whr-q3-deep-dive-margin-013336005.html",
+        "fonte": "StockStory",
         "data": "Data desconhecida"
     }
 ]
