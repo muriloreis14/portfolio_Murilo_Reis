@@ -1,5 +1,29 @@
 [
     {
+        "titulo": "Itau Unibanco (ITUB) Is Catching Fire on Wall Street",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/itau-unibanco-itub-catching-fire-063126602.html",
+        "fonte": "Insider Monkey",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "Banco Bradesco (BBD) Is Suddenly One of Wall Street’s Hottest Stocks",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/banco-bradesco-bbd-suddenly-one-061737152.html",
+        "fonte": "Insider Monkey",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "Inter & Co. (INTR) Suddenly Delivers a Jaw-Dropping Surge",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/inter-co-intr-suddenly-delivers-061022661.html",
+        "fonte": "Insider Monkey",
+        "data": "Data desconhecida"
+    },
+    {
+        "titulo": "XP Inc. (XP) Goes on a Monster Rally. Here’s What You Need to Know",
+        "link": "https://finance.yahoo.com/markets/stocks/articles/xp-inc-xp-goes-monster-060509360.html",
+        "fonte": "Insider Monkey",
+        "data": "Data desconhecida"
+    },
+    {
         "titulo": "Brazilian markets rally after Lula taps Bradesco chairman for finance chief",
         "link": "https://finance.yahoo.com/economy/policy/articles/brazilian-markets-rally-lula-taps-165347430.html",
         "fonte": "Reuters",
@@ -33,30 +57,6 @@
         "titulo": "Bradesco chairman Trabuco agrees to become Brazil's finance minister",
         "link": "https://finance.yahoo.com/economy/policy/articles/brazils-lula-sounds-bradesco-chairman-125408266.html",
         "fonte": "Reuters",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Nu Holdings Soars 11% on Record $1.1 Billion Profit as It Takes “First Steps Beyond Latin America”",
-        "link": "https://www.tikr.com/blog/nu-holdings-soars-11-on-record-1-1-billion-profit-as-it-takes-first-steps-beyond-latin-america?ref=yahoofinance&tlnk=yf-261113-6mm8v6h5",
-        "fonte": "TIKR",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Brazilian banks cut growth forecasts, raising fiscal stakes for Lula",
-        "link": "https://finance.yahoo.com/economy/policy/articles/brazilian-banks-cut-growth-forecasts-183353312.html",
-        "fonte": "Reuters",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Banco Bradesco (BOVESPA:BBDC4) Stock Fair Value Edges Lower After Cautious Analyst Revisions",
-        "link": "https://finance.yahoo.com/markets/stocks/articles/banco-bradesco-bovespa-bbdc4-stock-221023231.html",
-        "fonte": "Simply Wall St.",
-        "data": "Data desconhecida"
-    },
-    {
-        "titulo": "Bradesco Sinks 5% on Itau BBA Downgrade as Brazilian Bank Stocks Slide",
-        "link": "https://www.tikr.com/blog/bradesco-sinks-5-on-itau-bba-downgrade-as-brazilian-bank-stocks-slide?ref=yahoofinance",
-        "fonte": "TIKR",
         "data": "Data desconhecida"
     }
 ]
